@@ -8,7 +8,8 @@ module Vapebot
       @connection = Vapebot::Connection.new(@config)
     end
 
-    def run
+    def start
+      @connection.listen()
     end
   end
 end

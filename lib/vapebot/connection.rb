@@ -2,59 +2,50 @@
 
 require 'socket'
 
-
 module Vapebot
   class Connection
-    attr_accessor :socket
+    attr_accessor :socket, :stream
     def initialize(config)
       @socket = TCPSocket.new(config.host, config.port.to_i)
       @stream = []
       sleep 2
-      register(config.nick, config.user, config.host, config.pass)
+      IRC::Server::register(@socket, config.nick, config.pass)
       sleep 3
-      join_channel(config.channels)
+      IRC::Channel::join(@socket, config.channels)
     end
 
-    def register(nick, pass)
-      @socket.puts "NICK #{nick}"
-      sleep 1
-      @socket.puts "USER #{nick} 8 * :#{nick}"
-      sleep 1
-      @socket.puts "NICKSERV IDENTIFY #{pass}"
+    def send(message)
+      @socket.puts message
     end
 
-    def join_channel(channels)
-      channels.each { |channel|
-        puts channel
-        @socket.puts "JOIN #{channel}"
-        @socket.puts "PRIVMSG #{channel} :HERE!"
-      }
+    def receive
+      @socket.gets.chomp
+    end
+
+    def keepalive(msg)
+      send("PONG #{msg.split.last}")
+    end
+
+    def close
+      IRC::Server.quit(@socket)
+      @socket.close
     end
 
     def listen
       Thread.new {
-        while line = @socket.gets.chomp
-          @stream << line
+        while line = receive()
           puts line
+          if line[0..3] == "PONG"
+            keepalive(line)
+            puts "--------------HAD TO KEEP ALIVE!!!----------------"
+          end
+          @stream << line
+          #puts line
+          #if Vapebot::Message.parse(@socket, line)
+          #  puts "YeSssssssssssss"
+          #end
         end
       }
-    end
-
-    #TODO move this
-    def handle(command_str)
-      cmd, *args = command_str.split
-    end
-
-    #TODO move this
-    def parse(line)
-      _, command_str = line.scan(/(\sPRIVMSG\s.*\s:!)(.*)/).first
-      if command_str
-        handle(command_str)
-      elsif (line[0..3] == "PING")
-        @socket.puts "PONG #{line[5..-1]}"
-      else
-        #Do nothing
-      end
     end
 
   end
