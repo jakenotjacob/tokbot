@@ -2,6 +2,7 @@
 :port: 6667
 :nick: example_nick
 :user: example_user
+:pass: example_pass
 :channels:
   - '##examplechannel'
   - '#exchannel'

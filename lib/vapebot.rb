@@ -1,4 +1,3 @@
 require "vapebot/version"
-
-module Vapebot
-end
+require "vapebot/config"
+require "vapebot/bot"

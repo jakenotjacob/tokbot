@@ -1,4 +1,8 @@
 #!/usr/bin/env ruby
 
-require 'vapebot/version.rb'
-require 'vapebot/bot.rb'
+require 'vapebot'
+
+
+bot = Vapebot::Bot.new
+bot.run
+
