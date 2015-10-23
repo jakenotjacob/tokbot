@@ -33,3 +33,6 @@ build/
 
 # unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
 .rvmrc
+
+#Config for bot -- we leave config.example.yaml for public viewing
+/lib/vapebot/config.yaml

@@ -1,3 +1,4 @@
 #!/usr/bin/env ruby
 
 require 'vapebot/version.rb'
+require 'vapebot/bot.rb'
