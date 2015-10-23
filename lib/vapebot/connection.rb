@@ -15,7 +15,7 @@ module Vapebot
       join_channel(config.channels)
     end
 
-    def register(nick, user, host, pass)
+    def register(nick, pass)
       @socket.puts "NICK #{nick}"
       sleep 1
       @socket.puts "USER #{nick} 8 * :#{nick}"
