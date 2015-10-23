@@ -2,7 +2,7 @@
 
 module Vapebot
   class Bot
-    attr_accessor :config
+    attr_accessor :config, :connection
     def initialize()
       @config = Vapebot::Config.new
       @connection = Vapebot::Connection.new(@config)
