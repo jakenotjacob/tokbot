@@ -5,7 +5,4 @@ require 'vapebot'
 
 
 bot = Vapebot::Bot.new
-while line=bot.connection.socket.gets
-  puts line
-end
-
+bot.start

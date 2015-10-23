@@ -10,6 +10,9 @@ module Vapebot
 
     def start
       @connection.listen()
+      while line = @connection.socket.gets
+        puts line
+      end
     end
   end
 end

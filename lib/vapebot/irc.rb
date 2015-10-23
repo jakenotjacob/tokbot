@@ -23,6 +23,7 @@ module Vapebot
         sleep 1
         socket.puts "USER #{nick} 8 * :#{nick}"
         #puts "send user reg line to socket..."
+        socket.puts "NICKSERV IDENTIFY #{nick} #{pass}"
         sleep 1
       end
 

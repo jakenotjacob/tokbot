@@ -8,9 +8,7 @@ module Vapebot
     def initialize(config)
       @socket = TCPSocket.new(config.host, config.port.to_i)
       @stream = []
-      sleep 2
       IRC::Server::register(@socket, config.nick, config.pass)
-      sleep 3
       IRC::Channel::join(@socket, config.channels)
     end
 
