@@ -1,7 +1,7 @@
-host: irc.example.com
-port: 6667
-nick: example_nick
-user: example_user
-channels:
+:host: irc.example.com
+:port: 6667
+:nick: example_nick
+:user: example_user
+:channels:
   - '##examplechannel'
   - '#exchannel'
