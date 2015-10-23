@@ -8,13 +8,11 @@ module Vapebot
     attr_accessor :socket
     def initialize(config)
       @socket = TCPSocket.new(config.host, config.port.to_i)
-      puts "Opened connection..."
+      @stream = []
       sleep 2
       register(config.nick, config.user, config.host, config.pass)
-      puts "Registered to nickserv..."
       sleep 3
       join_channel(config.channels)
-      puts "Joined channel..."
     end
 
     def register(nick, user, host, pass)
@@ -31,6 +29,32 @@ module Vapebot
         @socket.puts "JOIN #{channel}"
         @socket.puts "PRIVMSG #{channel} :HERE!"
       }
+    end
+
+    def listen
+      Thread.new {
+        while line = @socket.gets.chomp
+          @stream << line
+          puts line
+        end
+      }
+    end
+
+    #TODO move this
+    def handle(command_str)
+      cmd, *args = command_str.split
+    end
+
+    #TODO move this
+    def parse(line)
+      _, command_str = line.scan(/(\sPRIVMSG\s.*\s:!)(.*)/).first
+      if command_str
+        handle(command_str)
+      elsif (line[0..3] == "PING")
+        @socket.puts "PONG #{line[5..-1]}"
+      else
+        #Do nothing
+      end
     end
 
   end
