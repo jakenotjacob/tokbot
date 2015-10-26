@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby
-
 module Vapebot
   class Bot
     attr_accessor :config, :connection
@@ -12,7 +10,6 @@ module Vapebot
       @connection.listen()
       while true
         line = @connection.socket.gets
-        puts line
       end
     end
   end

@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby
-
 require 'socket'
 
 module Vapebot
@@ -30,20 +28,14 @@ module Vapebot
     end
 
     def listen
-      Thread.new {
-        while line = receive()
-          puts line
-          if line[0..3] == "PONG"
-            keepalive(line)
-            puts "--------------HAD TO KEEP ALIVE!!!----------------"
-          end
-          @stream << line
-          #puts line
-          #if Vapebot::Message.parse(@socket, line)
-          #  puts "YeSssssssssssss"
-          #end
+      while line = receive()
+        if line[0..3] == "PONG"
+          keepalive(line)
+          puts "--------------HAD TO KEEP ALIVE!!!----------------"
         end
-      }
+        @stream << line
+        Vapebot::Message.parse(@socket, line)
+      end
     end
 
   end
