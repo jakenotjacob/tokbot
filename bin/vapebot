@@ -1,8 +1,18 @@
 #!/usr/bin/env ruby
+require 'colorize'
 
-require 'vapebot'
+begin
+  require 'vapebot'
+  if (bot = Irc::Bot.new)
+    puts "Affirmative, Dave. I read you.".green
+    puts "---"
+    bot.run
+  end
+rescue LoadError => e
+  puts "He's dead, Jim!".red
+  puts "Just a moment, Captain, sir. I'll explain what happened:".magenta
+  puts "---"
+  puts e.message.yellow
+  puts "---"
+end
 
-
-
-bot = Vapebot::Bot.new
-bot.start

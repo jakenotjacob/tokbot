@@ -1,19 +1,31 @@
-module Vapebot
+module Irc
+  class Message
+    attr_accessor :source, :command, :target, :args, :fact, :fact_args
+    def initialize(source, cmd, target, args)
+      @source = parse_source(source)
+      @command = cmd
+      @target = target
+      @args = args
+      @fact = nil
+      @fact_args = nil
+    end
 
-  module Message
-    def self.parse(socket, line)
-      if line[0] == ":"
-        if line.split($;, 3).last.include? ":!"
-          command, *args = line.slice(/(:![^\s]+.*)/, 1)[2..-1].split
-          if command == "info"
-            socket.puts "PRIVMSG #testingbotshere :I was born today. I dunno what #{args.join(" ")} is... or are. I still need to get some learnin'. Hello, ##vaperhangout."
-          else
-            ss = "You entered: (#{command}),  with the arguments: (#{args.join(",")})"
-            #TODO fix channel name to be dynamic
-            socket.puts "PRIVMSG #testingbotshere :#{ss}"
-          end
-        end
+    def parse_source(source)
+      return source.scan(/\w+/).first
+    end
+
+    def maybe_fact?
+      puts "Found args... #{args}"
+      if args[0..1] == ":!"
+        return true
+      else
+        return false
       end
+    end
+
+    def parse_fact
+      @fact, *@fact_args = args.split($;, 3)
+      @fact = @fact[2..-1]
     end
   end
 

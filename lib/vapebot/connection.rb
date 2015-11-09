@@ -1,43 +1,57 @@
 require 'socket'
 
-module Vapebot
+module Irc
   class Connection
-    attr_accessor :socket, :stream
-    def initialize(config)
-      @socket = TCPSocket.new(config.host, config.port.to_i)
-      @stream = []
-      IRC::Server::register(@socket, config.nick, config.pass)
-      IRC::Channel::join(@socket, config.channels)
+    attr_accessor :socket
+    def initialize
+      @socket = TCPSocket.open(Config[:server], Config[:port].to_i)
+      post_init
     end
 
-    def send(message)
-      @socket.puts message
+    def post_init
+      register
+      join_channel
     end
 
-    def receive
+    def register
+      send_pass
+      send_nick
+      send_user
+    end
+
+    def send(msg)
+      @socket.puts msg
+    end
+
+    def recv
       @socket.gets.chomp
     end
 
-    def keepalive(msg)
-      send("PONG #{msg.split.last}")
+    def privmsg(target, msg)
+      send "PRIVMSG #{target} :#{msg}"
     end
 
-    def close
-      IRC::Server.quit(@socket)
-      @socket.close
-    end
-
-    def listen
-      while line = receive()
-        if line[0..3] == "PONG"
-          keepalive(line)
-          puts "--------------HAD TO KEEP ALIVE!!!----------------"
-        end
-        @stream << line
-        Vapebot::Message.parse(@socket, line)
+    def send_pass
+      if Config[:password]
+        send "PASS #{Config[:password]}"
       end
     end
 
+    def send_nick
+      send "NICK #{Config[:nick]}"
+    end
+
+    def send_user
+      send "USER #{Config[:nick]} 8 * :#{Config[:user]}"
+    end
+
+    def join_channel
+      send "JOIN #{Config[:channel]}"
+    end
+
+    def stop
+      @socket.close
+    end
   end
 end
 

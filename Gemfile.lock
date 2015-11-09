@@ -6,6 +6,7 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
+    colorize (0.7.7)
     diff-lcs (1.2.5)
     rake (10.4.2)
     rspec (3.3.0)
@@ -27,6 +28,7 @@ PLATFORMS
 
 DEPENDENCIES
   bundler (~> 1.10)
+  colorize
   rake (~> 10.0)
   rspec
   vapebot!
