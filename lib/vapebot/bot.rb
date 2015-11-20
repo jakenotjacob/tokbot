@@ -43,7 +43,9 @@ module Irc
       when "help"
         response = "Here are vapebot's available commands --> " + Db::Facts.keys.sort_by{|f|f.downcase}.join(", ")
       when "request"
-          response = Db::Requests.add(msg.fact_args[0], msg.fact_args[1])
+        response = Db::Requests.add(msg.fact_args[0], msg.fact_args[1])
+      when "wtf"
+        response = "What the hell is #{msg.fact_args[0]}?"
       else
         response = Db::Facts.get(msg.fact)
       end

@@ -1,5 +1,5 @@
-:server: irc.freenode.net
-#:server: 127.0.0.1
+#:server: irc.freenode.net
+:server: 192.168.0.5
 :port: 6667
 :user: vapebot
 :nick: vapebot

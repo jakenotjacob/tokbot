@@ -36,3 +36,6 @@ build/
 
 #Config for bot -- we leave config.example.yaml for public viewing
 /lib/vapebot/config.yaml
+
+#Database files
+/data/
