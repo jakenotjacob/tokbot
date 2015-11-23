@@ -1,8 +1,8 @@
-:server: irc.freenode.net
-#:server: 192.168.0.5
+#:server: irc.freenode.net
+:server: 192.168.0.5
 :port: 6667
 :user: vapebot
 :nick: vapebot
 :password:
-#:channel: "##vaperhangout"
-:channel: "#vapebot-testing"
+:channel: "##vaperhangout"
+#:channel: "#vapebot-testing"

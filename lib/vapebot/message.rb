@@ -4,10 +4,18 @@ module Irc
     def initialize(source, cmd, target, args)
       @source = parse_source(source)
       @command = cmd
-      @target = target
+      @target = parse_target(target)
       @args = args
       @fact = nil
       @fact_args = nil
+    end
+
+    def parse_target(target)
+      if target == "vapebot"
+        @target = @source
+      else
+        @target = target
+      end
     end
 
     def parse_source(source)
