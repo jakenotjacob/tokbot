@@ -1,49 +1,70 @@
-require 'sdbm'
+require 'sequel'
 
-FACTS = "data/facts"
-REQUESTS = "data/requests"
+module Database
+  DB = if File.exists? "data/vapebot.db"
+         Sequel.sqlite("data/vapebot.db")
+       else
+         puts "Error! Database has not yet been created!".red
+         abort("Please run `rake db:create` then retry.")
+       end
 
-module Db
   module Facts
-    def self.add(name, reply)
-      SDBM.open(FACTS) do |fact|
-        fact[name] = reply
+    FACTS = DB[:facts]
+    def self.add(name, definition)
+      begin
+        if FACTS.insert(name: name, definition: definition)
+          return "Fact added."
+        else
+          return "Fact not added."
+        end
+      rescue Sequel::UniqueConstraintViolation
+        "Fact with that name or definition already exists."
+      rescue Sequel::NotNullConstraintViolation
+        "A fact needs a definition!"
       end
-      "Fact #{name} added."
+      #Returns ID on success
+      #Return NIL on already-existant name
     end
 
     def self.get(name)
-      SDBM.open(FACTS) do |fact|
-        if fact[name] != nil
-          fact[name]
+      if FACTS[name: name]
+        FACTS[name: name][:definition]
+      else
+        "Fact does not exist. Use !help to see available facts."
+      end
+      #Returns HASH on existant
+      #Returns NIL on non-existant
+    end
+
+    def self.update(name, definition)
+      begin
+        if FACTS.where(name: name).update(definition: definition)
+          "Fact updated."
         end
+      rescue Sequel::UniqueConstraintViolation
+        "Fact with that name or definition already exists."
+      rescue Sequel::NotNullConstraintViolation
+        "A fact needs a definition!"
       end
     end
 
     def self.remove(name)
-      SDBM.open(FACTS) do |fact|
-        fact.delete(name)
+      if FACTS[name: name]
+        FACTS.where(name: name).delete
+        "Fact removed."
+      else
+        "Cannot remove fact that doesn't exist!"
       end
-      "Fact #{name} removed."
+      #Return 1 on success
+      #Return 0 on non-exist
     end
 
-    def self.keys
-      SDBM.open(FACTS) do |fact|
-        fact.keys
+    def self.list
+      fact_list = []
+      FACTS.each do |f|
+        fact_list << f[:name]
       end
-    end
-  end
-
-  module Requests
-    def self.add(name, request)
-      SDBM.open(REQUESTS) do |req|
-        if req[name]
-          "The name of this feature request exists. Please choose another (or tack on a number)."
-        else
-          req[name] = request
-          "Feature request added!"
-        end
-      end
+      return fact_list.sort_by {|name| name.downcase}.join(" ")
     end
   end
 

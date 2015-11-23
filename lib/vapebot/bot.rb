@@ -30,24 +30,29 @@ module Irc
       case msg.fact
       when "add"
         if AUTH.include? msg.source
-          response = Db::Facts.add(msg.fact_args[0], msg.fact_args[1])
+          response = Database::Facts.add(msg.fact_args[0], msg.fact_args[1])
+        else
+          send(msg, "You are not authorized to perform this action.")
+        end
+      when "update"
+        if AUTH.include? msg.source
+          response = Database::Facts.update(msg.fact_args[0], msg.fact_args[1])
         else
           send(msg, "You are not authorized to perform this action.")
         end
       when "remove"
         if AUTH.include? msg.source
-          response = Db::Facts.remove(msg.fact_args[0])
+          response = Database::Facts.remove(msg.fact_args[0])
         else
           send(msg, "You are not authorized to perform this action.")
         end
       when "help"
-        response = "Here are vapebot's available commands --> " + Db::Facts.keys.sort_by{|f|f.downcase}.join(", ")
-      when "request"
-        response = Db::Requests.add(msg.fact_args[0], msg.fact_args[1])
+        response = "Here are vapebot's available commands --> " + Database::Facts.list
       when "wtf"
-        response = "What the hell is #{msg.fact_args[0]}?"
+        response = "What the fuck is #{msg.fact_args[0]}?"
+      when ""
       else
-        response = Db::Facts.get(msg.fact)
+        response = Database::Facts.get(msg.fact)
       end
       return [msg, response]
     end
