@@ -28,5 +28,11 @@ module IRC
   def privmsg(target, msg)
     send "PRIVMSG #{target} :#{msg}"
   end
+
+  def broadcastmsg(msg)
+    Config[:channels].each do |chan|
+      privmsg(chan, msg)
+    end
+  end
 end
 
