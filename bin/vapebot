@@ -1,11 +1,19 @@
 #!/usr/bin/env ruby
 require 'colorize'
 
+flags = ARGV
+
 begin
   require 'vapebot'
+
+  if (File.exists? "bin/vapebot.pid") && (flags.empty?)
+    abort "Bot instance already running!"
+  end
+
   if (bot = Bot.new)
     puts "Affirmative, Dave. I read you.".green
     puts "---"
+    File.new("bin/vapebot.pid", "w+").write(Process.pid)
     bot.run
   end
 rescue LoadError => e

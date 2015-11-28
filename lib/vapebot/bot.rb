@@ -5,6 +5,13 @@ class Bot
 
   def run
     while line = @connection.recv
+
+      Signal.trap("INT") do
+        @connection.close
+        File.delete('bin/vapebot.pid')
+        abort "Closing bot..."
+      end
+
       puts line
       #We only care for PRIVMSG, and PING
       if line.scan(/PING/).any?
