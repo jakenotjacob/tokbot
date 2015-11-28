@@ -8,10 +8,13 @@ RSpec::Core::RakeTask.new(:spec)
 task :default => :spec
 
 namespace :db do
-  task :create do
+  task :create, :table do |t, args|
     db = Sequel.sqlite('data/vapebot.db')
     if !File.exists? 'data/vapebot.db'
       puts "Vapebot database created.".green
+    end
+    if args.any?
+      eval "VapebotDB::create_#{args[:table]}_table(db)"
     end
     VapebotDB::create_facts_table(db)
     puts "Facts table created.".green
