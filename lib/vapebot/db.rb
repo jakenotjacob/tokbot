@@ -15,12 +15,14 @@ module Database
       username = args
       begin
         if USERS.insert(name: username)
-          "User added."
+          return "User added."
         else
-          "User not added."
+          return "User not added."
         end
       rescue Sequel::UniqueConstraintViolation
         "User with that name already exists."
+      rescue Sequel::NotNullConstraintViolation
+        "A user needs a name!"
       end
     end
 
@@ -73,8 +75,6 @@ module Database
       rescue Sequel::NotNullConstraintViolation
         "A fact needs a definition!"
       end
-      #Returns ID on success
-      #Return NIL on already-existant name
     end
 
     def self.get(args)
@@ -84,8 +84,6 @@ module Database
       else
         "Fact does not exist. Use !help to see available facts."
       end
-      #Returns HASH on existant
-      #Returns NIL on non-existant
     end
 
     def self.update(args)
