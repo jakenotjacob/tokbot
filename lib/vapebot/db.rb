@@ -24,7 +24,7 @@ module Database
     end
 
     def self.grant_admin(args)
-      username = args
+      username = args.first
       USERS.where(name: username).update(admin: true)
       "#{username} is now an admin."
     end
