@@ -1,13 +1,14 @@
 class Bot
+  attr_reader :connection
   def initialize
     @connection = Connection.new
   end
 
   def run
-    while line = @connection.recv
+    while line = connection.recv
 
       Signal.trap("INT") do
-        @connection.close
+        connection.close
         File.delete('bin/vapebot.pid')
         abort "Closing bot..."
       end
@@ -15,14 +16,14 @@ class Bot
       Signal.trap("TSTP") do
         puts "Enter text to send: "
         input = gets.chomp
-        @connection.broadcastmsg(input)
+        connection.broadcastmsg(input)
       end
 
       puts line
       #We only care for PRIVMSG, and PING
       if line.scan(/PING/).any?
         _, server = line.split(" ")
-        @connection.send "PONG #{server}"
+        connection.send "PONG #{server}"
       end
       if line.scan(/PRIVMSG/).any?
         source, _, dest, args = line.split(" ", 4)
@@ -57,7 +58,7 @@ class Bot
       end
     when "broadcast"
       if AUTH.include? msg.source
-        @connection.broadcastmsg(msg.cmd_args.join(" "))
+        connection.broadcastmsg(msg.cmd_args.join(" "))
       end
     when "help"
       response = "Here are vapebot's available commands --> " + Database::Facts.list
@@ -71,7 +72,7 @@ class Bot
   end
 
   def send(msg, response)
-    @connection.privmsg(msg.target, response)
+    connection.privmsg(msg.target, response)
   end
 
 end
