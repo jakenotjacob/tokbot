@@ -27,7 +27,7 @@ class Bot
       if line.scan(/PRIVMSG/).any?
         source, _, dest, args = line.split(" ", 4)
         msg = Message.new(source, dest, args)
-        if msg.maybe_fact?
+        if msg.maybe_cmd?
           send(*handle(msg))
         end
       end
@@ -36,36 +36,36 @@ class Bot
 
   AUTH = %w(agent_white cyberfawkes tomflint Symmetry neohaven cdsboy famine)
   def handle(msg)
-    case msg.fact
+    case msg.cmd
     when "add"
       if AUTH.include? msg.source
-        response = Database::Facts.add(msg.fact_args[0], msg.fact_args[1])
+        response = Database::Facts.add(msg.cmd_args[0], msg.cmd_args[1])
       else
         send(msg, "You are not authorized to perform this action.")
       end
     when "update"
       if AUTH.include? msg.source
-        response = Database::Facts.update(msg.fact_args[0], msg.fact_args[1])
+        response = Database::Facts.update(msg.cmd_args[0], msg.cmd_args[1])
       else
         send(msg, "You are not authorized to perform this action.")
       end
     when "remove"
       if AUTH.include? msg.source
-        response = Database::Facts.remove(msg.fact_args[0])
+        response = Database::Facts.remove(msg.cmd_args[0])
       else
         send(msg, "You are not authorized to perform this action.")
       end
     when "broadcast"
       if AUTH.include? msg.source
-        @connection.broadcastmsg(msg.fact_args.join(" "))
+        @connection.broadcastmsg(msg.cmd_args.join(" "))
       end
     when "help"
       response = "Here are vapebot's available commands --> " + Database::Facts.list
     when "wtf"
-      response = "What the fuck is #{msg.fact_args[0]}?"
+      response = "What the fuck is #{msg.cmd_args[0]}?"
     when ""
     else
-      response = Database::Facts.get(msg.fact)
+      response = Database::Facts.get(msg.cmd)
     end
     return [msg, response]
   end

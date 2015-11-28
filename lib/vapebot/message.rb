@@ -1,11 +1,11 @@
 class Message
-  attr_accessor :source, :target, :args, :fact, :fact_args
+  attr_accessor :source, :target, :args, :cmd, :cmd_args
   def initialize(source, target, args)
     @source = parse_source(source)
     @target = parse_target(target)
     @args = args
-    @fact = nil
-    @fact_args = nil
+    @cmd = nil
+    @cmd_args = nil
   end
 
   def parse_target(target)
@@ -20,19 +20,19 @@ class Message
     return source.scan(/\w+/).first
   end
 
-  def maybe_fact?
+  def maybe_cmd?
     puts "Found args... #{args}"
     if args[0..1] == ":!"
-      parse_fact
+      parse_cmd
       return true
     else
       return false
     end
   end
 
-  def parse_fact
-    @fact, *@fact_args = args.split(" ", 3)
-    @fact = @fact[2..-1]
+  def parse_cmd
+    @cmd, *@cmd_args = args.split(" ", 3)
+    @cmd = @cmd[2..-1]
   end
 end
 
