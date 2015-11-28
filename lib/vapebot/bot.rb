@@ -41,6 +41,8 @@ class Bot
     handler = lookup(msg.cmd)
     if msg.cmd == "help"
       response = eval "#{handler}"
+    elsif msg.cmd == "broadcast"
+      connection.broadcastmsg(msg.cmd_args.join(" "))
     elsif handler
       response = eval "#{handler} #{msg.cmd_args}"
     else
