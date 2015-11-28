@@ -35,7 +35,7 @@ class Bot
     end
   end
 
-  AUTH = %w(agent_white cyberfawkes tomflint Symmetry netarchy cdsboy)
+  AUTH = %w(agent_white cyberfawkes tomflint Symmetry neohaven cdsboy famine)
   def handle(msg)
     case msg.fact
     when "add"
