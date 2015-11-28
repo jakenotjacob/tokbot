@@ -45,7 +45,12 @@ class Bot
     elsif msg.cmd == "broadcast"
       connection.broadcastmsg(msg.cmd_args.join(" "))
     elsif handler
-      response = eval "#{handler} #{msg.cmd_args}"
+      #As of now Commands with args are all privledged methods
+      if Database::Users.is_admin? msg.source
+        response = eval "#{handler} #{msg.cmd_args}"
+      else
+        response = "You are not authorized to perform this action."
+      end
     else
       response = Database::Facts.get(msg.cmd)
     end
