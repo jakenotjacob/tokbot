@@ -15,11 +15,13 @@ namespace :db do
     end
     if args.any?
       eval "VapebotDB::create_#{args[:table]}_table(db)"
+      puts "Table #{args[:table]} created.".green
+    else
+      VapebotDB::create_facts_table(db)
+      puts "Facts table created.".green
+      VapebotDB::create_users_table(db)
+      puts "Users table created.".green
     end
-    VapebotDB::create_facts_table(db)
-    puts "Facts table created.".green
-    VapebotDB::create_users_table(db)
-    puts "Users table created.".green
   end
 end
 
