@@ -39,19 +39,19 @@ class Bot
     case msg.cmd
     when "add"
       if AUTH.include? msg.source
-        response = Database::Facts.add(msg.cmd_args[0], msg.cmd_args[1])
+        response = Database::Facts.add(msg.cmd_args)
       else
         send(msg, "You are not authorized to perform this action.")
       end
     when "update"
       if AUTH.include? msg.source
-        response = Database::Facts.update(msg.cmd_args[0], msg.cmd_args[1])
+        response = Database::Facts.update(msg.cmd_args)
       else
         send(msg, "You are not authorized to perform this action.")
       end
     when "remove"
       if AUTH.include? msg.source
-        response = Database::Facts.remove(msg.cmd_args[0])
+        response = Database::Facts.remove(msg.cmd_args)
       else
         send(msg, "You are not authorized to perform this action.")
       end
@@ -62,7 +62,7 @@ class Bot
     when "help"
       response = "Here are vapebot's available commands --> " + Database::Facts.list
     when "wtf"
-      response = "What the fuck is #{msg.cmd_args[0]}?"
+      response = "What the fuck is #{msg.cmd_args.first}?"
     when ""
     else
       response = Database::Facts.get(msg.cmd)

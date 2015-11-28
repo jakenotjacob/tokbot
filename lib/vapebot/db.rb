@@ -10,7 +10,8 @@ module Database
 
   module Facts
     FACTS = DB[:facts]
-    def self.add(name, definition)
+    def self.add(args)
+      name, definition = args
       begin
         if FACTS.insert(name: name, definition: definition)
           return "Fact added."
@@ -26,7 +27,8 @@ module Database
       #Return NIL on already-existant name
     end
 
-    def self.get(name)
+    def self.get(args)
+      name = args
       if FACTS[name: name]
         FACTS[name: name][:definition]
       else
@@ -36,7 +38,8 @@ module Database
       #Returns NIL on non-existant
     end
 
-    def self.update(name, definition)
+    def self.update(args)
+      name, definition = args
       begin
         if FACTS.where(name: name).update(definition: definition)
           "Fact updated."
@@ -48,7 +51,8 @@ module Database
       end
     end
 
-    def self.remove(name)
+    def self.remove(args)
+      name = args
       if FACTS[name: name]
         FACTS.where(name: name).delete
         "Fact removed."
