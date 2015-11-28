@@ -3,7 +3,7 @@ require 'colorize'
 
 begin
   require 'vapebot'
-  if (bot = Irc::Bot.new)
+  if (bot = Bot.new)
     puts "Affirmative, Dave. I read you.".green
     puts "---"
     bot.run
