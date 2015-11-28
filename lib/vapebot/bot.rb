@@ -12,6 +12,12 @@ class Bot
         abort "Closing bot..."
       end
 
+      Signal.trap("TSTP") do
+        puts "Enter text to send: "
+        input = gets.chomp
+        @connection.broadcastmsg(input)
+      end
+
       puts line
       #We only care for PRIVMSG, and PING
       if line.scan(/PING/).any?
