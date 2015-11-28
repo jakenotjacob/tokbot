@@ -25,7 +25,7 @@ class Bot
         @connection.send "PONG #{server}"
       end
       if line.scan(/PRIVMSG/).any?
-        source, cmd, dest, args = line.split($;, 4)
+        source, cmd, dest, args = line.split(" ", 4)
         msg = Message.new(source, cmd, dest, args)
         if msg.maybe_fact?
           msg.parse_fact
