@@ -34,30 +34,50 @@ class Bot
     end
   end
 
-  AUTH = %w(agent_white cyberfawkes tomflint Symmetry neohaven cdsboy famine)
   def handle(msg)
     case msg.cmd
     when "add"
-      if AUTH.include? msg.source
+      if Database::Users.is_admin?(msg.source)
         response = Database::Facts.add(msg.cmd_args)
       else
         send(msg, "You are not authorized to perform this action.")
       end
     when "update"
-      if AUTH.include? msg.source
+      if Database::Users.is_admin?(msg.source)
         response = Database::Facts.update(msg.cmd_args)
       else
         send(msg, "You are not authorized to perform this action.")
       end
     when "remove"
-      if AUTH.include? msg.source
+      if Database::Users.is_admin?(msg.source)
         response = Database::Facts.remove(msg.cmd_args)
       else
         send(msg, "You are not authorized to perform this action.")
       end
+    #####
+    when "useradd"
+      if Database::Users.is_admin?(msg.source)
+        response = Database::Users.add(msg.cmd_args)
+      else
+        send(msg, "You are not authorized to perform this action.")
+      end
+    when "useradmin"
+      if Database::Users.is_admin?(msg.source)
+        response = Database::Users.grant_admin(msg.cmd_args)
+      else
+        send(msg, "You are not authorized to perform this action.")
+      end
+    when "isadmin"
+      if Database::Users.is_admin?(msg.source)
+        response = Database::Users.is_admin?(msg.cmd_args)
+      else
+        send(msg, "You are not authorized to perform this action.")
+      end
     when "broadcast"
-      if AUTH.include? msg.source
+      if Database::Users.is_admin?(msg.source)
         connection.broadcastmsg(msg.cmd_args.join(" "))
+      else
+        send(msg, "You are not authorized to perform this action.")
       end
     when "help"
       response = "Here are vapebot's available commands --> " + Database::Facts.list

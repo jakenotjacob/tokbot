@@ -9,13 +9,14 @@ task :default => :spec
 
 namespace :db do
   task :create do
-    if File.exists? 'data/vapebot.db'
-      puts "Database already exists.".red
-      abort
-    end
     db = Sequel.sqlite('data/vapebot.db')
-    puts "Vapebot database created.".green
+    if !File.exists? 'data/vapebot.db'
+      puts "Vapebot database created.".green
+    end
     VapebotDB::create_facts_table(db)
+    puts "Facts table created.".green
+    VapebotDB::create_users_table(db)
+    puts "Users table created.".green
   end
 end
 
@@ -28,6 +29,15 @@ module VapebotDB
     end
     puts "Facts table created.".green
   end
+
+ def self.create_users_table(db)
+    db.create_table :users do
+      primary_key :id
+      String :name, unique: true, null: false
+      String :pin
+      TrueClass :admin, default: false
+    end
+ end
 end
 
 

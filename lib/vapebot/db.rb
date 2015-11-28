@@ -8,6 +8,37 @@ module Database
          abort("Please run `rake db:create` then retry.")
        end
 
+  module Users
+    USERS = DB[:users]
+    def self.add(args)
+      username = args
+      begin
+        if USERS.insert(name: username)
+          "User added."
+        else
+          "User not added."
+        end
+      rescue Sequel::UniqueConstraintViolation
+        "User with that name already exists."
+      end
+    end
+
+    def self.grant_admin(args)
+      username = args
+      USERS.where(name: username).update(admin: true)
+      "#{username} is now an admin."
+    end
+
+    def self.is_admin?(args)
+      username = args
+      if USERS[name: username] && USERS[name: username][:admin]
+        return true
+      else
+        return false
+      end
+    end
+  end
+
   module Facts
     FACTS = DB[:facts]
     def self.add(args)
