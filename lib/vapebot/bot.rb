@@ -56,6 +56,10 @@ class Bot
       else
         send(msg, "You are not authorized to perform this action.")
       end
+    when "broadcast"
+      if AUTH.include? msg.source
+        @connection.broadcastmsg(msg.fact_args.join(" "))
+      end
     when "help"
       response = "Here are vapebot's available commands --> " + Database::Facts.list
     when "wtf"
