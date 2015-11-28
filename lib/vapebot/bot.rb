@@ -28,7 +28,6 @@ class Bot
         source, _, dest, args = line.split(" ", 4)
         msg = Message.new(source, dest, args)
         if msg.maybe_fact?
-          msg.parse_fact
           send(*handle(msg))
         end
       end

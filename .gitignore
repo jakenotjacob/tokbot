@@ -34,6 +34,9 @@ build/
 # unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
 .rvmrc
 
+#Bot PID
+/bin/*.pid
+
 #Config for bot -- we leave config.example.yaml for public viewing
 /config/config.yaml
 

@@ -23,6 +23,7 @@ class Message
   def maybe_fact?
     puts "Found args... #{args}"
     if args[0..1] == ":!"
+      parse_fact
       return true
     else
       return false
