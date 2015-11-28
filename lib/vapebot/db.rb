@@ -24,6 +24,24 @@ module Database
       end
     end
 
+    def self.delete(args)
+      name = args
+      if USERS[name: name]
+        USERS.where(name: name).delete
+        "User deleted."
+      else
+        "User does not exist."
+      end
+    end
+
+    def self.list
+      user_list = []
+      USERS.each do |u|
+        user_list << u[:name]
+      end
+      return user_list.sort_by {|name| name.downcase}.join(" ")
+    end
+
     def self.grant_admin(args)
       username = args.first
       USERS.where(name: username).update(admin: true)
@@ -91,8 +109,6 @@ module Database
       else
         "Cannot remove fact that doesn't exist!"
       end
-      #Return 1 on success
-      #Return 0 on non-exist
     end
 
     def self.list

@@ -8,7 +8,9 @@ module Command
     },
     users: {
       useradd: "Database::Users.add",
-      useradmin: "Database::Users.grant_admin",
+      userdel: "Database::Users.delete",
+      userlist: "Database::Users.list",
+      giveadmin: "Database::Users.grant_admin",
       isadmin: "Database::Users.is_admin?"
     }
   }

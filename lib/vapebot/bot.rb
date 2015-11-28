@@ -39,7 +39,8 @@ class Bot
 
   def handle(msg)
     handler = lookup(msg.cmd)
-    if msg.cmd == "help"
+    #Methods without arguments
+    if %w(help userlist).include? msg.cmd
       response = eval "#{handler}"
     elsif msg.cmd == "broadcast"
       connection.broadcastmsg(msg.cmd_args.join(" "))
