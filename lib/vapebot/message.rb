@@ -1,8 +1,7 @@
 class Message
-  attr_accessor :source, :command, :target, :args, :fact, :fact_args
-  def initialize(source, cmd, target, args)
+  attr_accessor :source, :target, :args, :fact, :fact_args
+  def initialize(source, target, args)
     @source = parse_source(source)
-    @command = cmd
     @target = parse_target(target)
     @args = args
     @fact = nil
