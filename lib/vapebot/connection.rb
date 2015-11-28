@@ -47,7 +47,8 @@ class Connection
     send "JOIN #{Config[:channel]}"
   end
 
-  def stop
+  def close
+    send "QUIT"
     @socket.close
   end
 end
