@@ -1,4 +1,7 @@
+require "vapebot/command"
+
 class Bot
+  include Command
   attr_reader :connection
   def initialize
     @connection = Connection.new
@@ -35,55 +38,11 @@ class Bot
   end
 
   def handle(msg)
-    case msg.cmd
-    when "add"
-      if Database::Users.is_admin?(msg.source)
-        response = Database::Facts.add(msg.cmd_args)
-      else
-        send(msg, "You are not authorized to perform this action.")
-      end
-    when "update"
-      if Database::Users.is_admin?(msg.source)
-        response = Database::Facts.update(msg.cmd_args)
-      else
-        send(msg, "You are not authorized to perform this action.")
-      end
-    when "remove"
-      if Database::Users.is_admin?(msg.source)
-        response = Database::Facts.remove(msg.cmd_args)
-      else
-        send(msg, "You are not authorized to perform this action.")
-      end
-    #####
-    when "useradd"
-      if Database::Users.is_admin?(msg.source)
-        response = Database::Users.add(msg.cmd_args)
-      else
-        send(msg, "You are not authorized to perform this action.")
-      end
-    when "useradmin"
-      if Database::Users.is_admin?(msg.source)
-        response = Database::Users.grant_admin(msg.cmd_args)
-      else
-        send(msg, "You are not authorized to perform this action.")
-      end
-    when "isadmin"
-      if Database::Users.is_admin?(msg.source)
-        response = Database::Users.is_admin?(msg.cmd_args)
-      else
-        send(msg, "You are not authorized to perform this action.")
-      end
-    when "broadcast"
-      if Database::Users.is_admin?(msg.source)
-        connection.broadcastmsg(msg.cmd_args.join(" "))
-      else
-        send(msg, "You are not authorized to perform this action.")
-      end
-    when "help"
-      response = "Here are vapebot's available commands --> " + Database::Facts.list
-    when "wtf"
-      response = "What the fuck is #{msg.cmd_args.first}?"
-    when ""
+    handler = lookup(msg.cmd)
+    if msg.cmd == "help"
+      response = eval "#{handler}"
+    elsif handler
+      response = eval "#{handler} #{msg.cmd_args}"
     else
       response = Database::Facts.get(msg.cmd)
     end
