@@ -31,7 +31,7 @@ class Message
   end
 
   def parse_fact
-    @fact, *@fact_args = args.split($;, 3)
+    @fact, *@fact_args = args.split(" ", 3)
     @fact = @fact[2..-1]
   end
 end
