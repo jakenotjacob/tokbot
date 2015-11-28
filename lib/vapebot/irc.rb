@@ -19,6 +19,11 @@ module IRC
     send "USER #{Config[:nick]} 8 * :#{Config[:user]}"
   end
 
+  def pong(line)
+    _, server = line.split(" ")
+    send "PONG #{server}"
+  end
+
   def join_channels
     Config[:channels].each do |chan|
       send "JOIN #{chan}"

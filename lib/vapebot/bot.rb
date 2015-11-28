@@ -22,8 +22,7 @@ class Bot
       puts line
       #We only care for PRIVMSG, and PING
       if line.scan(/PING/).any?
-        _, server = line.split(" ")
-        connection.send "PONG #{server}"
+        connection.pong(line)
       end
       if line.scan(/PRIVMSG/).any?
         source, _, dest, args = line.split(" ", 4)
