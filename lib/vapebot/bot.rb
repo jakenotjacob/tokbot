@@ -31,13 +31,13 @@ class Bot
         source, _, dest, args = line.split(" ", 4)
         msg = Message.new(source, dest, args)
         if msg.maybe_cmd?
-          send(*handle(msg))
+          send(*route(msg))
         end
       end
     end
   end
 
-  def handle(msg)
+  def route(msg)
     handler = lookup(msg.cmd)
     #Methods without arguments
     if %w(help userlist).include? msg.cmd
