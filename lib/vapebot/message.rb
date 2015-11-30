@@ -9,7 +9,7 @@ class Message
   end
 
   def sparkle
-    colors = (1..6).to_a.map{|i| "\e[3#{i.to_s}m"}.cycle
+    colors = (1..6).to_a.map{|i| "\x1b[3#{i.to_s}m"}.cycle
     @cmd_args = @cmd_args.join(" ").split(//).map{ |c|
       "#{colors.next}#{c}"
     }.join
