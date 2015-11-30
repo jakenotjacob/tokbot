@@ -1,3 +1,4 @@
+$:.unshift File.dirname(__FILE__)
 class Person < Plugin
   def execute
     greet

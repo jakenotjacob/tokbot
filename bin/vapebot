@@ -20,7 +20,9 @@ begin
     File.delete "bin/vapebot.pid"
     puts "Something's fucky...".red
     puts "---"
-    abort("#{e}")
+    puts "#{e.message}".yellow
+    puts e.backtrace
+    abort
   end
 rescue LoadError => e
   puts "He's dead, Jim!".red

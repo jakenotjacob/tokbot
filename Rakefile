@@ -8,6 +8,7 @@ RSpec::Core::RakeTask.new(:spec)
 task :default => :spec
 
 namespace :db do
+  Dir.mkdir "data" unless Dir.exists? "data"
   task :create, :table do |t, args|
     db = Sequel.sqlite('data/vapebot.db')
     if !File.exists? 'data/vapebot.db'
