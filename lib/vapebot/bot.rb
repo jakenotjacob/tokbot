@@ -10,7 +10,6 @@ class Bot
   end
 
   def run
-    puts plugins
     while line = connection.recv
       Signal.trap("INT") do
         connection.close
