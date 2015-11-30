@@ -1,5 +1,7 @@
 require "vapebot/plugin"
-Dir["plugins/*.rb"].each { |file| require file }
+#NOTE! __dir__ does not exist in rubies prior to 2.0
+Dir[__dir__ + '/plugins/*.rb'].each {|file| require file }
+
 
 module Handler
   def plugins
