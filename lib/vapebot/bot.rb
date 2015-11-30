@@ -43,6 +43,8 @@ class Bot
     #Methods without arguments
     if %w(help userlist).include? msg.cmd
       response = eval "#{handler}"
+    elsif msg.cmd == "sparkle"
+      response = msg.sparkle
     elsif msg.cmd == "broadcast"
       connection.broadcastmsg(msg.cmd_args.join(" "))
     elsif handler
