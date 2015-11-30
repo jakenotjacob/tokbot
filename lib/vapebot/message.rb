@@ -8,13 +8,6 @@ class Message
     @cmd_args = nil
   end
 
-  def sparkle
-    colors = (31..36).to_a.map{|i| "\x1B[#{i.to_s}m"}.cycle
-    @cmd_args = @cmd_args.join(" ").split(//).map{ |c|
-      "#{colors.next}#{c}"
-    }.join.concat("\x1b[39;49m")
-  end
-
   def parse_target(target)
     if target == "vapebot"
       @target = @source
