@@ -1,15 +1,17 @@
 require "vapebot/command"
+require "vapebot/handler"
 
 class Bot
   include Command
+  include Handler
   attr_reader :connection
   def initialize
     @connection = Connection.new
   end
 
   def run
+    puts plugins
     while line = connection.recv
-
       Signal.trap("INT") do
         connection.close
         File.delete('bin/vapebot.pid')
