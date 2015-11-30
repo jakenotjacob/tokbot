@@ -9,11 +9,18 @@ begin
     abort "Bot instance already running!"
   end
 
+  begin
   if (bot = Bot.new)
     puts "Affirmative, Dave. I read you.".green
     puts "---"
     File.new("bin/vapebot.pid", "w+").write(Process.pid)
     bot.run
+  end
+  rescue => e
+    File.delete "bin/vapebot.pid"
+    puts "Something's fucky...".red
+    puts "---"
+    abort("#{e}")
   end
 rescue LoadError => e
   puts "He's dead, Jim!".red
