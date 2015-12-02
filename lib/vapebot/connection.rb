@@ -12,6 +12,7 @@ class Connection
 
   def post_init
     register
+    sleep 2
     join_channels
   end
 

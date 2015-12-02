@@ -1,5 +1,6 @@
 require "vapebot/command"
 require "vapebot/handler"
+require "vapebot/logger"
 
 class Bot
   include Command
@@ -14,7 +15,7 @@ class Bot
       Signal.trap("INT") do
         connection.close
         File.delete('bin/vapebot.pid')
-        abort "Closing bot..."
+        abort "losing bot..."
       end
 
       Signal.trap("TSTP") do
@@ -23,6 +24,9 @@ class Bot
         connection.broadcastmsg(input)
       end
 
+      if Logger.create_dir
+        puts "---- Checked for log directory. ----"
+      end
       puts line
       #We only care for PRIVMSG, and PING
       if line.scan(/PING/).any?
