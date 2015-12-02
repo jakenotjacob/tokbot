@@ -36,35 +36,26 @@ class Bot
         source, _, dest, args = line.split(" ", 4)
         msg = Message.new(source, dest, args)
         if msg.maybe_cmd?
-          send(*route(msg))
+          say(*route(msg))
         end
       end
     end
   end
 
   def route(msg)
-    handler = lookup(msg.cmd)
-    #Methods without arguments
-    if %w(help userlist).include? msg.cmd
-      response = eval "#{handler}"
-    elsif msg.cmd == "broadcast"
-      connection.broadcastmsg(msg.cmd_args.join(" "))
-    elsif handler
-      #As of now Commands with args are all privledged methods
-      if Database::Users.is_admin? msg.source
-        response = eval "#{handler} #{msg.cmd_args}"
-      else
-        response = "You are not authorized to perform this action."
-      end
+    handler = find_command(msg.cmd)
+    if handler.is_a? Symbol
+      response = dispatch(handler, msg.cmd)
+    elsif handler.is_a? String
+      response = run_command(handler, msg.cmd_args)
     else
       response = Database::Facts.get(msg.cmd)
     end
     return [msg, response]
   end
 
-  def send(msg, response)
+  def say(msg, response)
     connection.privmsg(msg.target, response)
   end
-
 end
 

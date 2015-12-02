@@ -35,6 +35,9 @@ module IRC
   end
 
   def broadcastmsg(msg)
+    if msg.is_a? Array
+      msg = msg.join(" ")
+    end
     Config[:channels].each do |chan|
       privmsg(chan, msg)
     end
