@@ -8,21 +8,20 @@ class Message
     @cmd_args = nil
   end
 
-  def parse_target(target)
-    if target == "vapebot"
+  def parse_target(t)
+    if t == "vapebot"
       @target = @source
     else
-      @target = target
+      @target = t
     end
   end
 
-  def parse_source(source)
-    return source.scan(/\w+/).first
+  def parse_source(s)
+    return s.scan(/\w+/).first
   end
 
   def maybe_cmd?
-    puts "Found args... #{args}"
-    if args[0..1] == ":!"
+    if @args[0..1] == ":!"
       parse_cmd
       return true
     else
@@ -31,7 +30,7 @@ class Message
   end
 
   def parse_cmd
-    @cmd, *@cmd_args = args.split(" ", 3)
+    @cmd, *@cmd_args = @args.split
     @cmd = @cmd[2..-1]
   end
 end

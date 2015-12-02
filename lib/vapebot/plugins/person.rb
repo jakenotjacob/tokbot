@@ -4,7 +4,7 @@ class Person < Plugin
     greet
   end
 
-  def greet
-    "Hello, ima Person!"
+  def greet(name)
+    "Hello, my name is #{name.join(" ")}!"
   end
 end

@@ -40,6 +40,8 @@ module Command
       return handler
     elsif handler = get_handler(cmd)
       return handler
+    else
+      return nil
     end
   end
 

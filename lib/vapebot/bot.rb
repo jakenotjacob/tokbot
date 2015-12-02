@@ -45,7 +45,7 @@ class Bot
   def route(msg)
     handler = find_command(msg.cmd)
     if handler.is_a? Symbol
-      response = dispatch(handler, msg.cmd)
+      response = dispatch(handler, msg.cmd, msg.cmd_args)
     elsif handler.is_a? String
       response = run_command(handler, msg.cmd_args)
     else

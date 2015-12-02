@@ -18,8 +18,12 @@ module Handler
     }
   end
 
-  def dispatch(plugin, cmd)
-    plugins[plugin].new.send cmd.to_sym
+  def dispatch(plugin, cmd, args)
+    if args.empty?
+      plugins[plugin].new.send cmd.to_sym
+    else
+      plugins[plugin].new.send cmd.to_sym, args
+    end
   end
 end
 

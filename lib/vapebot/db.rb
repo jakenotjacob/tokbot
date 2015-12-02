@@ -63,7 +63,8 @@ module Database
   module Facts
     FACTS = DB[:facts]
     def self.add(args)
-      name, definition = args
+      name, *definition = args
+      definition = definition.join(" ")
       begin
         if FACTS.insert(name: name, definition: definition)
           return "Fact added."
@@ -87,7 +88,8 @@ module Database
     end
 
     def self.update(args)
-      name, definition = args
+      name, *definition = args
+      definition = definition.join(" ")
       begin
         if FACTS.where(name: name).update(definition: definition)
           "Fact updated."
