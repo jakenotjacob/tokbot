@@ -12,17 +12,21 @@ class Bot
 
   def run
     while line = connection.recv
-      Signal.trap("INT") do
-        connection.close
-        File.delete('bin/vapebot.pid')
-        abort "\nClosing bot..."
+      [:INT, :TSTP].each do |signal|
+        Signal.trap(signal) do
+          case signal
+          when :INT
+            connection.close
+            File.delete('bin/vapebot.pid')
+            abort "\nClosing bot..."
+          when :TSTP
+            puts "\nEnter text to send: "
+            input = gets.chomp
+            connection.broadcastmsg(input)
+          end
+        end
       end
 
-      Signal.trap("TSTP") do
-        puts "\nEnter text to send: "
-        input = gets.chomp
-        connection.broadcastmsg(input)
-      end
       if Logger.create_dir
         puts "---- Checked for log directory. ----"
       end
