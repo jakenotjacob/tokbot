@@ -8,12 +8,18 @@ module Handler
     PluginManager.plugins
   end
 
-  def dispatch(cmd)
+  def get_handler(cmd)
     plugins.each { |k, v|
       if v.instance_methods.include? cmd.to_sym
-        v.new.send cmd.to_sym
+        return k
+      else
+        return nil
       end
     }
+  end
+
+  def dispatch(plugin, cmd)
+    plugins[plugin].new.send cmd.to_sym
   end
 end
 
