@@ -1,9 +1,9 @@
 require "vapebot/handler"
 module Command
   COMMANDS = {
-    channels: {
-      broadcast: "Connection.broadcastmsg",
-    },
+    #channels: {
+      #broadcast: "Connection.broadcastmsg",
+    #},
     facts: {
       add: "Database::Facts.add",
       update: "Database::Facts.update",
