@@ -15,15 +15,14 @@ class Bot
       Signal.trap("INT") do
         connection.close
         File.delete('bin/vapebot.pid')
-        abort "losing bot..."
+        abort "\nClosing bot..."
       end
 
       Signal.trap("TSTP") do
-        puts "Enter text to send: "
+        puts "\nEnter text to send: "
         input = gets.chomp
         connection.broadcastmsg(input)
       end
-
       if Logger.create_dir
         puts "---- Checked for log directory. ----"
       end
