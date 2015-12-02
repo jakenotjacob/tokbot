@@ -27,9 +27,6 @@ class Bot
         end
       end
 
-      if Logger.create_dir
-        puts "---- Checked for log directory. ----"
-      end
       puts line
       #We only care for PRIVMSG, and PING
       if line.scan(/PING/).any?
@@ -38,6 +35,9 @@ class Bot
       if line.scan(/PRIVMSG/).any?
         source, _, dest, args = line.split(" ", 4)
         msg = Message.new(source, dest, args)
+        if Logger.is_setup?
+          Logger.log(msg.source, msg.target, msg.args)
+        end
         if msg.maybe_cmd?
           say(*route(msg))
         end
