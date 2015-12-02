@@ -1,5 +1,9 @@
+require "vapebot/handler"
 module Command
-  DB_DISPATCH = {
+  COMMANDS = {
+    channels: {
+      broadcast: "Connection.broadcastmsg",
+    },
     facts: {
       add: "Database::Facts.add",
       update: "Database::Facts.update",
@@ -15,15 +19,28 @@ module Command
     }
   }
 
-  def span(table, cmd)
-    table.map { |group, hash|
-      hash.map do |key, val|
-        val if key == cmd.to_sym
+  def get_command(table, cmd)
+    table.map { |group, methods|
+      methods.map do |label, method|
+        method if label == cmd.to_sym
       end
     }.flatten.compact.first
   end
 
-  def lookup(cmd)
-    span(DB_DISPATCH, cmd)
+  def run_command(cmd, args)
+    if args.empty?
+      eval "#{cmd}"
+    else
+      eval "#{cmd} #{args}"
+    end
   end
+
+  def find_command(cmd)
+    if handler = get_command(COMMANDS, cmd)
+      return handler
+    elsif handler = get_handler(cmd)
+      return handler
+    end
+  end
+
 end

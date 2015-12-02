@@ -5,6 +5,6 @@ class Person < Plugin
   end
 
   def greet
-    puts "Hello, ima Person!"
+    "Hello, ima Person!"
   end
 end
