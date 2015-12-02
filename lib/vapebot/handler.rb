@@ -9,9 +9,9 @@ module Handler
   end
 
   def get_handler(cmd)
-    plugins.each { |k, v|
-      if v.instance_methods.include? cmd.to_sym
-        return k
+    plugins.each { |name, klass|
+      if klass.instance_methods.include? cmd.to_sym
+        return name
       else
         return nil
       end
