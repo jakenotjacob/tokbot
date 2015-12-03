@@ -8,14 +8,15 @@ class Bot
   attr_reader :connection
   def initialize
     @connection = Connection.new
+    Logger.init(Config[:channels])
   end
-
   def run
     while line = connection.recv
       [:INT, :TSTP].each do |signal|
         Signal.trap(signal) do
           case signal
           when :INT
+            Logger.write_status(Config[:channels], status = "Closing")
             connection.close
             File.delete('bin/vapebot.pid')
             abort "\nClosing bot..."
@@ -35,9 +36,7 @@ class Bot
       if line.scan(/PRIVMSG/).any?
         source, _, dest, args = line.split(" ", 4)
         msg = Message.new(source, dest, args)
-        if Logger.is_setup?
-          Logger.log(msg.source, msg.target, msg.args)
-        end
+        Logger.log(msg.source, msg.target, msg.args)
         if msg.maybe_cmd?
           say(*route(msg))
         end
@@ -61,4 +60,3 @@ class Bot
     connection.privmsg(msg.target, response)
   end
 end
-

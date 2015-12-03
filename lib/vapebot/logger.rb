@@ -1,7 +1,21 @@
 $:.unshift File.dirname(__FILE__)
 module Logger
+<<<<<<< Updated upstream
   def self.is_setup?
+=======
+  
+  def self.init(channels)
+>>>>>>> Stashed changes
     self.create_dirs
+    self.write_status(channels, status = "Opening")
+  end
+
+  def self.write_status(channels, status = nil,  datetime = Time.new.strftime("%F %T")) 
+    channels.each { |chan|
+      File.open("logs/#{chan.gsub("#","")}.log", "a+") do |f|
+        f.puts "---#{status} Log #{datetime}---\n"
+      end
+    }
   end
 
   def self.create_dirs
@@ -11,18 +25,25 @@ module Logger
     return true
   end
 
+  def self.stop_log(channel) ##for now, debugging
+    puts "CLOSING LOG"
+    datetime = Time.now.strftime("%F %T")
+    File.open("logs/testing.log}", "a+") do |f|
+      f.write("---Logging Stopped #{datetime}---")
+    end
+  end
+
   def self.log(user, dest, message)
     datetime = Time.now.strftime("%F %T")
-    user = "<#{user}>"
     message = message[1..-1]
     if dest.include? "#"
       dest.gsub!("#", "")
       File.open("logs/#{dest}.log", "a+") do |f|
-        f.write("#{datetime} #{user} #{message}\n")
+        f.write("#{datetime} <#{user}> #{message}\n")
       end
     else
       File.open("logs/private/#{dest}.log", "a+") do |f|
-        f.write("#{datetime} #{dest} #{message}\n")
+        f.write("#{datetime} <#{dest}> #{message}\n")
       end 
     end
   end
