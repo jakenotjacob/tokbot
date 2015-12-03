@@ -1,6 +1,5 @@
 $:.unshift File.dirname(__FILE__)
 module Logger
-  
   def self.is_setup?
     self.create_dirs
   end
