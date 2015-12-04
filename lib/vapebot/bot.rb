@@ -16,7 +16,7 @@ class Bot
         Signal.trap(signal) do
           case signal
           when :INT
-            Logger.write_status(Config[:channels], status = "Closing")
+            Logger.write_status(Config[:channels], "Closing")
             connection.close
             File.delete('bin/vapebot.pid')
             abort "\nClosing bot..."

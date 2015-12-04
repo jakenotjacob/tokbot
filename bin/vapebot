@@ -5,7 +5,7 @@ require 'colorize'
 begin
   require 'vapebot'
 
-  if File.exists? "bin/vapebot.pid"
+  if File.exist? "bin/vapebot.pid"
     abort "Bot instance already running!"
   end
 

@@ -1,16 +1,11 @@
 $:.unshift File.dirname(__FILE__)
 module Logger
-<<<<<<< Updated upstream
-  def self.is_setup?
-=======
-  
   def self.init(channels)
->>>>>>> Stashed changes
     self.create_dirs
-    self.write_status(channels, status = "Opening")
+    self.write_status(channels, "Opening")
   end
 
-  def self.write_status(channels, status = nil,  datetime = Time.new.strftime("%F %T")) 
+  def self.write_status(channels, status = nil, datetime = Time.new.strftime("%F %T"))
     channels.each { |chan|
       File.open("logs/#{chan.gsub("#","")}.log", "a+") do |f|
         f.puts "---#{status} Log #{datetime}---\n"
@@ -20,7 +15,7 @@ module Logger
 
   def self.create_dirs
     %w(logs logs/private).each do |dir|
-      Dir.mkdir dir unless Dir.exists? dir
+      Dir.mkdir dir unless Dir.exist? dir
     end
     return true
   end
@@ -44,7 +39,7 @@ module Logger
     else
       File.open("logs/private/#{dest}.log", "a+") do |f|
         f.write("#{datetime} <#{dest}> #{message}\n")
-      end 
+      end
     end
   end
 

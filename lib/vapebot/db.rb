@@ -2,7 +2,7 @@ require 'sequel'
 
 module Database
 
-  DB = if File.exists? "data/vapebot.db"
+  DB = if File.exist? "data/vapebot.db"
          Sequel.sqlite("data/vapebot.db")
        else
          puts "Error! Database has not yet been created!".red
