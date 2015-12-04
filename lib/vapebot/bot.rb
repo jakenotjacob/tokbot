@@ -1,33 +1,22 @@
 require "vapebot/command"
 require "vapebot/handler"
 require "vapebot/logger"
+require "vapebot/trap"
 
 class Bot
   include Command
   include Handler
+  include Trapper
   attr_reader :connection
   def initialize
     @connection = Connection.new
     Logger.init(Config[:channels])
   end
   def run
+    Thread.new do
+      trap_signals
+    end
     while line = connection.recv
-      [:INT, :TSTP].each do |signal|
-        Signal.trap(signal) do
-          case signal
-          when :INT
-            Logger.write_status(Config[:channels], "Closing")
-            connection.close
-            File.delete('bin/vapebot.pid')
-            abort "\nClosing bot..."
-          when :TSTP
-            puts "\nEnter text to send: "
-            input = gets.chomp
-            connection.broadcastmsg(input)
-          end
-        end
-      end
-
       puts line
       #We only care for PRIVMSG, and PING
       if line.scan(/PING/).any?
