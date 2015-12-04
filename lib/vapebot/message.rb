@@ -1,3 +1,4 @@
+module Vapebot
 class Message
   attr_accessor :source, :target, :args, :cmd, :cmd_args
   def initialize(source, target, args)
@@ -33,5 +34,6 @@ class Message
     @cmd, *@cmd_args = @args.split
     @cmd = @cmd[2..-1]
   end
+end
 end
 

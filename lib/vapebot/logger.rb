@@ -1,4 +1,5 @@
 $:.unshift File.dirname(__FILE__)
+module Vapebot
 module Logger
   def self.init(channels)
     self.create_dirs
@@ -42,5 +43,6 @@ module Logger
       end
     end
   end
-
 end
+end
+

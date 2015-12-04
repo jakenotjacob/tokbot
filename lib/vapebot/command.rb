@@ -1,4 +1,4 @@
-require "vapebot/handler"
+module Vapebot
 module Command
   COMMANDS = {
     #channels: {
@@ -46,3 +46,5 @@ module Command
   end
 
 end
+end
+

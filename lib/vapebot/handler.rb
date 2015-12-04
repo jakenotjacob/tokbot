@@ -1,8 +1,7 @@
-require "vapebot/plugin"
 #NOTE! __dir__ does not exist in rubies prior to 2.0
 Dir[__dir__ + '/plugins/*.rb'].each {|file| require file }
 
-
+module Vapebot
 module Handler
   def plugins
     PluginManager.plugins
@@ -25,5 +24,6 @@ module Handler
       plugins[plugin].new.send cmd.to_sym, args
     end
   end
+end
 end
 

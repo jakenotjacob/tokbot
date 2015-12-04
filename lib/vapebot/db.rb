@@ -1,5 +1,4 @@
-require 'sequel'
-
+module Vapebot
 module Database
 
   DB = if File.exist? "data/vapebot.db"
@@ -120,5 +119,6 @@ module Database
     end
   end
 
+end
 end
 

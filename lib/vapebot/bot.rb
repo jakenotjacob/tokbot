@@ -1,8 +1,4 @@
-require "vapebot/command"
-require "vapebot/handler"
-require "vapebot/logger"
-require "vapebot/trap"
-
+module Vapebot
 class Bot
   include Command
   include Handler
@@ -49,3 +45,5 @@ class Bot
     connection.privmsg(msg.target, response)
   end
 end
+end
+

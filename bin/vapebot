@@ -1,7 +1,5 @@
 #!/usr/bin/env ruby
 
-require 'colorize'
-
 begin
   require 'vapebot'
 
@@ -31,3 +29,4 @@ rescue LoadError => e
   puts e.message.yellow
   puts "---"
 end
+

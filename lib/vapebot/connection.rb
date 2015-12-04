@@ -1,7 +1,4 @@
-require 'socket'
-
-require "vapebot/irc"
-
+module Vapebot
 class Connection
   include IRC
   attr_accessor :socket
@@ -28,5 +25,6 @@ class Connection
     send "QUIT"
     @socket.close
   end
+end
 end
 

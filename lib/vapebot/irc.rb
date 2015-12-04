@@ -1,3 +1,4 @@
+module Vapebot
 module IRC
   def register
     send_pass
@@ -42,5 +43,6 @@ module IRC
       privmsg(chan, msg)
     end
   end
+end
 end
 

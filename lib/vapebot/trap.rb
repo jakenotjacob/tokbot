@@ -1,3 +1,4 @@
+module Vapebot
 module Trapper
   def trap_signals
     [:INT, :TSTP].each do |signal|
@@ -16,4 +17,5 @@ module Trapper
       end
     end
   end
+end
 end

@@ -1,3 +1,4 @@
+module Vapebot
 module PluginManager
   def self.plugins
     @plugins ||= {}
@@ -19,5 +20,6 @@ class Plugin
 
   def execute
   end
+end
 end
 
