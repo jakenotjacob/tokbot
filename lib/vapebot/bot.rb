@@ -3,15 +3,19 @@ class Bot
   include Command
   include Handler
   include Trapper
+
   attr_reader :connection
   def initialize
     @connection = Connection.new
     Logger.init(Config[:channels])
   end
+
   def run
+
     Thread.new do
       trap_signals
     end
+
     while line = connection.recv
       puts line
       #We only care for PRIVMSG, and PING
@@ -19,8 +23,9 @@ class Bot
         connection.pong(line)
       end
       if line.scan(/PRIVMSG/).any?
-        source, _, dest, args = line.split(" ", 4)
-        msg = Message.new(source, dest, args)
+        source, _, target, args = line.split(" ", 4)
+        params = {source: source, target: target, args: args}
+        msg = Message.new(params)
         Logger.log(msg.source, msg.target, msg.args)
         if msg.maybe_cmd?
           say(*route(msg))

@@ -1,24 +1,29 @@
 module Vapebot
 class Message
-  attr_accessor :source, :target, :args, :cmd, :cmd_args
-  def initialize(source, target, args)
-    @source = parse_source(source)
-    @target = parse_target(target)
-    @args = args
+  attr_accessor :args, :cmd, :cmd_args
+  attr_reader :source, :target
+  def initialize(params)
+    @source = params[:source]
+    @target = params[:target]
+    @args = params[:args]
     @cmd = nil
     @cmd_args = nil
+    post_init
   end
 
-  def parse_target(t)
-    if t == "vapebot"
+  def post_init
+    parse_source
+    parse_target
+  end
+
+  def parse_target
+    if @target == Config[:nick]
       @target = @source
-    else
-      @target = t
     end
   end
 
-  def parse_source(s)
-    return s.scan(/\w+/).first
+  def parse_source
+    @source = @source.scan(/\w+/).first
   end
 
   def maybe_cmd?

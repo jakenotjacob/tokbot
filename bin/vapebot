@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+$:.unshift File.dirname(__FILE__)
 
 begin
   require 'vapebot'
@@ -8,10 +9,10 @@ begin
   end
 
   begin
-  if (bot = Bot.new)
+  if (bot = Vapebot::Bot.new)
     puts "Affirmative, Dave. I read you.".green
     puts "---"
-    File.new("bin/vapebot.pid", "w+").write(Process.pid)
+    File.new("bin/vapebot.pid", "a+").write(Process.pid)
     bot.run
   end
   rescue => e
@@ -29,4 +30,3 @@ rescue LoadError => e
   puts e.message.yellow
   puts "---"
 end
-
