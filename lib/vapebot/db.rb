@@ -1,5 +1,6 @@
 module Vapebot
 module Database
+  require "sequel"
 
   DB = if File.exist? "data/vapebot.db"
          Sequel.sqlite("data/vapebot.db")

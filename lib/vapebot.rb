@@ -1,26 +1,24 @@
 require "vapebot/version"
 require "vapebot/config"
 
+require "vapebot/command"
+require "vapebot/handler"
+require "vapebot/trap"
+
 require "vapebot/bot"
+require "vapebot/irc"
 require "vapebot/connection"
 require "vapebot/message"
 require "vapebot/db"
 require "vapebot/logger"
-require "vapebot/handler"
-require "vapebot/trap"
-require "vapebot/irc"
+
+#Extensions
+require "vapebot/plugin"
 
 #stdlib
 require 'socket'
 
-#Extensions
-require "vapebot/plugin"
-require "vapebot/command"
-
 #Third party
 require 'colorize'
 require 'sequel'
-
-module Vapebot
-end
 

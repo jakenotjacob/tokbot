@@ -1,4 +1,4 @@
-$:.unshift File.dirname(__FILE__)
+#$:.unshift File.dirname(__FILE__)
 module Vapebot
 module Logger
   def self.init(channels)
@@ -33,8 +33,8 @@ module Logger
     datetime = Time.now.strftime("%F %T")
     message = message[1..-1]
     if dest.include? "#"
-      dest.gsub!("#", "")
-      File.open("logs/#{dest}.log", "a+") do |f|
+      chan = dest.gsub("#", "")
+      File.open("logs/#{chan}.log", "a+") do |f|
         f.write("#{datetime} <#{user}> #{message}\n")
       end
     else
