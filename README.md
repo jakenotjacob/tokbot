@@ -18,6 +18,10 @@ Initialize the database and tables:
 
     $ rake db:create
 
+Create the config file:
+
+    $ cp config/config.example.yaml config/config.yaml
+
 ## Usage
 
 Run the bot using:
