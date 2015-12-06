@@ -81,6 +81,8 @@ module Database
       name = args
       if FACTS[name: name]
         FACTS[name: name][:definition]
+      elsif name == "help"
+        self.list()
       else
         "Fact does not exist. Use !help to see available facts."
       end

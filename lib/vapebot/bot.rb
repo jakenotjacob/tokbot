@@ -36,7 +36,11 @@ class Bot
   def route(msg)
     handler = get_command(msg.cmd)
     if handler
-      response = run_command(handler, msg.cmd_args)
+      if Database::Users.is_admin?(msg.source)
+        response = run_command(handler, msg.cmd_args)
+      else
+        response = "You are not authorized to do that."
+      end
     else
       response = Database::Facts.get(msg.cmd)
     end
