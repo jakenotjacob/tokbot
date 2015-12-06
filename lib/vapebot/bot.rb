@@ -1,7 +1,6 @@
 module Vapebot
 class Bot
   include Command
-  include Handler
   include Trapper
 
   attr_reader :connection
@@ -35,10 +34,8 @@ class Bot
   end
 
   def route(msg)
-    handler = find_command(msg.cmd)
-    if handler.is_a? Symbol
-      response = dispatch(handler, msg.cmd, msg.cmd_args)
-    elsif handler.is_a? String
+    handler = get_command(msg.cmd)
+    if handler
       response = run_command(handler, msg.cmd_args)
     else
       response = Database::Facts.get(msg.cmd)

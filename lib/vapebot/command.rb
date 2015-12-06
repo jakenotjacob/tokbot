@@ -19,8 +19,8 @@ module Command
     }
   }
 
-  def get_command(table, cmd)
-    table.map { |group, methods|
+  def get_command(cmd)
+    COMMANDS.map { |group, methods|
       methods.map do |label, method|
         method if label == cmd.to_sym
       end
@@ -32,16 +32,6 @@ module Command
       eval "#{cmd}"
     else
       eval "#{cmd} #{args}"
-    end
-  end
-
-  def find_command(cmd)
-    if handler = get_command(COMMANDS, cmd)
-      return handler
-    elsif handler = get_handler(cmd)
-      return handler
-    else
-      return nil
     end
   end
 
