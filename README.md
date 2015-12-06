@@ -10,15 +10,21 @@ Clone the repository:
 git clone git@github.com:jaketnotjacob/vapebot
 ```
 
-And install the dependencies:
+Install the dependencies:
 
     $ bundle install
+
+Create the database (and tables):
+
+    $ rake db:create
 
 ## Usage
 
 Run the bot using:
 
     $ bundle exec vapebot
+or simply...
+    $ vapebot
 
 ## Development
 
