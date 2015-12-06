@@ -7,8 +7,7 @@ module Command
     facts: {
       add: "Database::Facts.add",
       update: "Database::Facts.update",
-      remove: "Database::Facts.remove",
-      help: "Database::Facts.list"
+      remove: "Database::Facts.remove"
     },
     users: {
       useradd: "Database::Users.add",
@@ -28,10 +27,14 @@ module Command
   end
 
   def run_command(cmd, args)
+    begin
     if args.empty?
       eval "#{cmd}"
     else
       eval "#{cmd} #{args}"
+    end
+    rescue ArgumentError
+      return "Wrong number of arguments."
     end
   end
 
