@@ -24,7 +24,9 @@ Create the config file:
 
 ## Usage
 
-Run the bot using:
+Run the bot using (either):
+
+    $ bundle exec vapebot
 
     $ vapebot
 
