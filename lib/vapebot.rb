@@ -1,13 +1,12 @@
 #Third party
 require 'colorize'
 require 'sequel'
+require 'yaml'
 
 #stdlib
 require 'socket'
 
 require "vapebot/version"
-require "vapebot/config"
-
 require "vapebot/command"
 require "vapebot/trap"
 
@@ -18,3 +17,7 @@ require "vapebot/message"
 require "vapebot/db"
 require "vapebot/logger"
 
+
+module Vapebot
+  Config = YAML.load_file "config/config.yaml"
+end
