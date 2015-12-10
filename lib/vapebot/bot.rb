@@ -41,6 +41,8 @@ class Bot
       else
         response = "You are not authorized to do that."
       end
+    else
+       response = Database::Facts.get(msg.cmd)
     end
     return [msg, response]
   end
