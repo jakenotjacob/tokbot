@@ -27,8 +27,12 @@ class Bot
         msg = Message.new(params)
         Logger.log(msg.source, msg.target, msg.args)
         if msg.maybe_cmd?
-          say(*route(msg))
+          response = route(msg)
+          if user = msg.user_mentioned
+            response.last.prepend("#{user}: ")
+          end
         end
+        say(*response)
       end
     end
   end
