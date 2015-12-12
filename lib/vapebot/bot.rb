@@ -31,8 +31,8 @@ class Bot
           if user = msg.user_mentioned
             response.last.prepend("#{user}: ")
           end
+          say(*response)
         end
-        say(*response)
       end
     end
   end
