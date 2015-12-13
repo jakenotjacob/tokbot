@@ -1,14 +1,14 @@
 module Vapebot
 module IRC
   def register
-    send_pass
     send_nick
     send_user
+    send_pass
   end
 
   def send_pass
-    if Config[:password]
-      send "PASS #{Config[:password]}"
+    if Config[:identify]
+      send "NICKSERV IDENTIFY #{Config[:password]}"
     end
   end
 
