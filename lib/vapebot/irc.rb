@@ -3,12 +3,11 @@ module IRC
   def register
     send_nick
     send_user
-    sleep 3
     send_pass
   end
 
   def send_pass
-    if Config[:identify]
+    if Config[:password]
       send "NICKSERV IDENTIFY #{Config[:password]}"
     end
   end
