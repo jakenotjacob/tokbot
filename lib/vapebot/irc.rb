@@ -3,6 +3,7 @@ module IRC
   def register
     send_nick
     send_user
+    sleep 3
     send_pass
   end
 
