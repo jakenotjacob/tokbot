@@ -35,6 +35,17 @@ class Message
     end
   end
 
+  def user_mentioned
+    if (@cmd_args[0] == "|")
+      user = @cmd_args[1]
+      if !(user.nil?) && !(user.empty?)
+        return user
+      end
+    else
+      return nil
+    end
+  end
+
   def parse_cmd
     @cmd, *@cmd_args = @args.split
     @cmd = @cmd[2..-1]

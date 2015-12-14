@@ -27,7 +27,11 @@ class Bot
         msg = Message.new(params)
         Logger.log(msg.source, msg.target, msg.args)
         if msg.maybe_cmd?
-          say(*route(msg))
+          response = route(msg)
+          if user = msg.user_mentioned
+            response.last.prepend("#{user}: ")
+          end
+          say(*response)
         end
       end
     end
@@ -42,7 +46,7 @@ class Bot
         response = "You are not authorized to do that."
       end
     else
-      response = Database::Facts.get(msg.cmd)
+       response = Database::Facts.get(msg.cmd)
     end
     return [msg, response]
   end
