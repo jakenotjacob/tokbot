@@ -1,6 +1,7 @@
 module Vapebot
 class Bot
   include Command
+  include Handler
   include Trapper
 
   attr_reader :connection
@@ -31,22 +32,19 @@ class Bot
           if user = msg.user_mentioned
             response.last.prepend("#{user}: ")
           end
-          say(*response)
+          if response.last
+            say(*response)
+          end
         end
       end
     end
   end
 
   def route(msg)
-    handler = get_command(msg.cmd)
-    if handler
-      if Database::Users.is_admin?(msg.source)
-        response = run_command(handler, msg.cmd_args)
-      else
-        response = "You are not authorized to do that."
-      end
-    else
-       response = Database::Facts.get(msg.cmd)
+    handler = get_handler(msg.cmd)
+    unless handler.empty?
+      puts "Handler found: #{handler}".green
+      response = dispatch(handler, msg.cmd, msg.cmd_args)
     end
     return [msg, response]
   end
