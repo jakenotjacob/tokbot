@@ -16,7 +16,7 @@ begin
     bot.run
   end
   rescue => e
-    File.delete "bin/vapebot.pid"
+    File.delete "bin/vapebot.pid" if File.exist? "bin/vapebot.pid"
     puts "Something's fucky...".red
     puts "---"
     puts "#{e.message}".yellow

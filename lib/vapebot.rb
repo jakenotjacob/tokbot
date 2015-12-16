@@ -7,8 +7,11 @@ require 'yaml'
 require 'socket'
 
 require "vapebot/version"
-require "vapebot/command"
 require "vapebot/trap"
+
+require "vapebot/plugin"
+require "vapebot/handler"
+require "vapebot/command"
 
 require "vapebot/bot"
 require "vapebot/irc"
@@ -17,7 +20,7 @@ require "vapebot/message"
 require "vapebot/db"
 require "vapebot/logger"
 
-
 module Vapebot
   Config = YAML.load_file "config/config.yaml"
 end
+

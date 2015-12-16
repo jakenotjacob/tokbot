@@ -14,6 +14,12 @@ Install the dependencies:
 
     $ bundle install
 
+<<<<<<< HEAD
+Create the database (and tables):
+
+    $ rake db:create
+
+=======
 Initialize the database and tables:
 
     $ rake db:create
@@ -22,11 +28,14 @@ Create the config file:
 
     $ cp config/config.example.yaml config/config.yaml
 
+>>>>>>> origin/master
 ## Usage
 
 Run the bot using (either):
 
     $ bundle exec vapebot
+or simply...
+    $ vapebot
 
     $ vapebot
 
