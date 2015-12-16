@@ -41,10 +41,20 @@ class Bot
   end
 
   def route(msg)
-    handler = get_handler(msg.cmd)
-    unless handler.empty?
-      puts "Handler found: #{handler}".green
-      response = dispatch(handler, msg.cmd, msg.cmd_args)
+    handler = is_plugin?(msg.cmd)
+    if !handler.empty?
+      response = dispatch(handler, msg.cmd_args)
+    else
+      if Database::Users.is_admin?(msg.source)
+        handler = get_command(msg.cmd)
+        if handler
+          response = run_command(handler, msg.cmd_args)
+        else
+          response = Database::Facts.get(msg.cmd)
+        end
+      else
+        response = Database::Facts.get(msg.cmd)
+      end
     end
     return [msg, response]
   end

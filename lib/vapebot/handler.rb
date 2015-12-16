@@ -7,20 +7,21 @@ module Vapebot
       PluginManager.plugins
     end
 
-    def get_handler(cmd)
-      puts "Plugins loaded: #{plugins}"
+    def is_plugin?(thing)
       plugins.select { |name, klass|
-        if klass.instance_methods.include? cmd.to_sym
+        #if klass.instance_methods.include? cmd.to_sym
+        if name == thing.to_sym
           return name
         end
       }
     end
 
-    def dispatch(plugin, cmd, args)
+    def dispatch(plugin, args)
+      #plugin and cmd are same thing...
       if args.empty?
-        plugins[plugin].new.send cmd.to_sym
+        plugins[plugin].new
       else
-        plugins[plugin].new.send cmd.to_sym, args
+        plugins[plugin].new(args).execute
       end
     end
   end

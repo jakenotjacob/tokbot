@@ -13,6 +13,8 @@ module Vapebot
     def self.inherited(klass)
       PluginManager.register(klass)
     end
+    def execute
+    end
   end
 end
 
