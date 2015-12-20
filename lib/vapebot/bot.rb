@@ -35,7 +35,7 @@ class Bot
           if response && response.not_empty?
             connection.privmsg(msg.target, response)
           else
-            connection.notice(msg.target, :unknown)
+            connection.notice(msg.source, :unknown)
           end
         end
       end
