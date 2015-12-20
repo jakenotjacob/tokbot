@@ -84,7 +84,7 @@ module Database
       elsif name == "help"
         self.list()
       else
-        "Fact does not exist. Use !help to see available facts."
+        nil
       end
     end
 

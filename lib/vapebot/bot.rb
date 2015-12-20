@@ -30,10 +30,12 @@ class Bot
         if msg.maybe_cmd?
           response = route(msg)
           if user = msg.user_mentioned
-            response.last.prepend("#{user}: ")
+            response.prepend("#{user}: ")
           end
-          if response.last
-            say(*response)
+          if response && response.not_empty?
+            connection.privmsg(msg.target, response)
+          else
+            connection.notice(msg.target, :unknown)
           end
         end
       end
@@ -56,12 +58,9 @@ class Bot
         response = Database::Facts.get(msg.cmd)
       end
     end
-    return [msg, response]
+    return response
   end
 
-  def say(msg, response)
-    connection.privmsg(msg.target, response)
-  end
 end
 end
 

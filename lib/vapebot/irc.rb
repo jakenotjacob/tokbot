@@ -35,6 +35,13 @@ module IRC
     send "PRIVMSG #{target} :#{msg}"
   end
 
+  def notice(target, error)
+    case error
+    when :unknown
+      send "NOTICE #{target} :Unknown command. Use !help to see available commands."
+    end
+  end
+
   def broadcastmsg(msg)
     if msg.is_a? Array
       msg = msg.join(" ")

@@ -6,6 +6,9 @@ require 'yaml'
 #stdlib
 require 'socket'
 
+#helpers
+require "vapebot/helpers"
+
 require "vapebot/version"
 require "vapebot/trap"
 
