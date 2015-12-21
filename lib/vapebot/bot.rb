@@ -11,33 +11,38 @@ class Bot
   end
 
   def run
-
     Thread.new do
       trap_signals
     end
-
-    while line = connection.recv
-      puts line
+    while input = connection.recv
+      puts input
       #We only care for PRIVMSG, and PING
-      if line.scan(/PING/).any?
-        connection.pong(line)
+      if input.scan(/PING/).any?
+        connection.pong(input)
       end
-      if line.scan(/PRIVMSG/).any?
-        source, _, target, args = line.split(" ", 4)
-        params = {source: source, target: target, args: args}
-        msg = Message.new(params)
-        Logger.log(msg.source, msg.target, msg.args)
-        if msg.maybe_cmd?
-          response = route(msg)
-          if user = msg.user_mentioned
-            response.prepend("#{user}: ")
-          end
-          if response && response.not_empty?
-            connection.privmsg(msg.target, response)
-          else
-            connection.notice(msg.source, :unknown)
-          end
-        end
+      if input.scan(/PRIVMSG/).any?
+        msg = Message.new(sanitize(input))
+        handle(msg)
+      end
+    end
+  end
+
+  def sanitize(input)
+    source, _, target, args = input.split(" ", 4)
+    Logger.log(source, target, args)
+    return {source: source, target: target, args: args}
+  end
+
+  def handle(msg)
+    if msg.maybe_cmd?
+      response = route(msg)
+      if user = msg.user_mentioned
+        response.prepend("#{user}: ")
+      end
+      if response && response.not_empty?
+        connection.privmsg(msg.target, response)
+      else
+        connection.notice(msg.source, :unknown)
       end
     end
   end
