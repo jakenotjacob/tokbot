@@ -22,7 +22,9 @@ class Bot
       end
       if input.scan(/PRIVMSG/).any?
         msg = Message.new(sanitize(input))
-        handle(msg)
+        if msg.maybe_cmd?
+          handle(msg)
+        end
       end
     end
   end
@@ -34,16 +36,14 @@ class Bot
   end
 
   def handle(msg)
-    if msg.maybe_cmd?
-      response = route(msg)
-      if user = msg.user_mentioned
-        response.prepend("#{user}: ")
-      end
-      if response && response.not_empty?
-        connection.privmsg(msg.target, response)
-      else
-        connection.notice(msg.source, :unknown)
-      end
+    response = route(msg)
+    if user = msg.user_mentioned
+      response.prepend("#{user}: ")
+    end
+    if response && response.not_empty?
+      connection.privmsg(msg.target, response)
+    else
+      connection.notice(msg.source, :unknown)
     end
   end
 
