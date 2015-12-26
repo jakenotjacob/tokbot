@@ -14,18 +14,16 @@ Install the dependencies:
 
     $ bundle install
 
-Create the database (and tables):
+Build the database (and tables):
 
     $ rake db:create
 
 =======
-Initialize the database and tables:
-
-    $ rake db:create
-
-Create the config file:
+Create the config file using the template:
 
     $ cp config/config.example.yaml config/config.yaml
+
+Modify this file to your needs before running.
 
 ## Usage
 
