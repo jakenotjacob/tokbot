@@ -33,8 +33,6 @@ Run the bot using (either):
 or simply...
     $ vapebot
 
-    $ vapebot
-
 ## Development
 
 Please follow the development model [A Successful Git branching model (Vincent Driessen)](http://nvie.com/posts/a-successful-git-branching-model/) when working on this project.  We feel that this is the best way to keep the tree nice and tidy for the time being (though we are always open to suggestions!).
