@@ -4,12 +4,12 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
-Giphy	giphy.rb	/^class Giphy < Vapebot::Plugin$/;"	c
-api_str	giphy.rb	/^  def api_str$/;"	f	class:Giphy
-execute	giphy.rb	/^  def execute$/;"	f	class:Giphy
-initialize	giphy.rb	/^  def initialize(tags)$/;"	f	class:Giphy
-new	giphy.rb	/^  def self.new(args=nil)$/;"	F	class:Giphy
-parse_json	giphy.rb	/^  def parse_json$/;"	f	class:Giphy
-random	giphy.rb	/^  def random$/;"	f	class:Giphy
-response	giphy.rb	/^  def response$/;"	f	class:Giphy
-tag_list	giphy.rb	/^  def tag_list$/;"	f	class:Giphy
+Giphy	giphy_plugin.rb	/^class Giphy < Vapebot::Plugin$/;"	c
+api_str	giphy_plugin.rb	/^  def api_str$/;"	f	class:Giphy
+execute	giphy_plugin.rb	/^  def execute$/;"	f	class:Giphy
+initialize	giphy_plugin.rb	/^  def initialize(tags)$/;"	f	class:Giphy
+new	giphy_plugin.rb	/^  def self.new(args=nil)$/;"	F	class:Giphy
+parse_json	giphy_plugin.rb	/^  def parse_json$/;"	f	class:Giphy
+random	giphy_plugin.rb	/^  def random$/;"	f	class:Giphy
+response	giphy_plugin.rb	/^  def response$/;"	f	class:Giphy
+tag_list	giphy_plugin.rb	/^  def tag_list$/;"	f	class:Giphy

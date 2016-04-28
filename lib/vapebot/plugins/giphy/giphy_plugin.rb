@@ -1,7 +1,6 @@
 class Giphy < Vapebot::Plugin
   PUBLIC_API_KEY = "dc6zaTOxFJmzC"
   URL = "http://api.giphy.com/v1/gifs/"
-  attr_reader :link
   def initialize(tags)
     @tags = tags
   end
