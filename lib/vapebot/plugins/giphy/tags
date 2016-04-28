@@ -1,0 +1,15 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+Giphy	giphy.rb	/^class Giphy < Vapebot::Plugin$/;"	c
+api_str	giphy.rb	/^  def api_str$/;"	f	class:Giphy
+execute	giphy.rb	/^  def execute$/;"	f	class:Giphy
+initialize	giphy.rb	/^  def initialize(tags)$/;"	f	class:Giphy
+new	giphy.rb	/^  def self.new(args=nil)$/;"	F	class:Giphy
+parse_json	giphy.rb	/^  def parse_json$/;"	f	class:Giphy
+random	giphy.rb	/^  def random$/;"	f	class:Giphy
+response	giphy.rb	/^  def response$/;"	f	class:Giphy
+tag_list	giphy.rb	/^  def tag_list$/;"	f	class:Giphy

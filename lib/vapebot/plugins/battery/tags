@@ -1,0 +1,17 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+Battery	battery_plugin.rb	/^class Battery < Vapebot::Plugin$/;"	c
+BatteryDB	model.rb	/^class BatteryDB < Sequel::Model(:batteries)$/;"	c
+basics	model.rb	/^  def basics$/;"	f	class:BatteryDB
+execute	battery_plugin.rb	/^  def execute$/;"	f	class:Battery
+full_name	model.rb	/^  def full_name$/;"	f	class:BatteryDB
+initialize	battery_plugin.rb	/^  def initialize(args)$/;"	f	class:Battery
+list	model.rb	/^  def self.list$/;"	F	class:BatteryDB
+new	battery_plugin.rb	/^  def self.new(args=nil)$/;"	F	class:Battery
+overview	battery_plugin.rb	/^  def overview$/;"	f	class:Battery
+post_init	battery_plugin.rb	/^  def post_init()$/;"	f	class:Battery
+voltages	model.rb	/^  def voltages$/;"	f	class:BatteryDB
