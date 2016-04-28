@@ -1,3 +1,4 @@
+require 'json'
 class Giphy < Vapebot::Plugin
   PUBLIC_API_KEY = "dc6zaTOxFJmzC"
   URL = "http://api.giphy.com/v1/gifs/"
