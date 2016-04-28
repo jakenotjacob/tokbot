@@ -2,8 +2,9 @@ require 'json'
 class Giphy < Vapebot::Plugin
   PUBLIC_API_KEY = "dc6zaTOxFJmzC"
   URL = "http://api.giphy.com/v1/gifs/"
-  def initialize(tags)
-    @tags = tags
+  attr_reader :tags
+  def initialize(args)
+    @tags = args
   end
 
   def self.new(args=nil)

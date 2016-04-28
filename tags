@@ -58,7 +58,7 @@ initialize	/home/jake/Code/vapebot/lib/vapebot/connection.rb	/^  def initialize$
 initialize	/home/jake/Code/vapebot/lib/vapebot/message.rb	/^  def initialize(params)$/;"	f	class:Vapebot.Message
 initialize	/home/jake/Code/vapebot/lib/vapebot/plugins/battery/battery_plugin.rb	/^  def initialize(args)$/;"	f	class:Battery
 initialize	/home/jake/Code/vapebot/lib/vapebot/plugins/calc/calc_plugin.rb	/^  def initialize(args)$/;"	f	class:Calc
-initialize	/home/jake/Code/vapebot/lib/vapebot/plugins/giphy/giphy_plugin.rb	/^  def initialize(tags)$/;"	f	class:Giphy
+initialize	/home/jake/Code/vapebot/lib/vapebot/plugins/giphy/giphy_plugin.rb	/^  def initialize(args)$/;"	f	class:Giphy
 is_admin	/home/jake/Code/vapebot/lib/vapebot/db.rb	/^    def self.is_admin?(args)$/;"	F	class:Vapebot.Users
 is_plugin?	/home/jake/Code/vapebot/lib/vapebot/handler.rb	/^    def is_plugin?(thing)$/;"	f	class:Vapebot.Handler
 join_channels	/home/jake/Code/vapebot/lib/vapebot/irc.rb	/^  def join_channels$/;"	f	class:Vapebot.IRC

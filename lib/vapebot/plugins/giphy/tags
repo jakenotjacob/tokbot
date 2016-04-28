@@ -7,7 +7,7 @@
 Giphy	giphy_plugin.rb	/^class Giphy < Vapebot::Plugin$/;"	c
 api_str	giphy_plugin.rb	/^  def api_str$/;"	f	class:Giphy
 execute	giphy_plugin.rb	/^  def execute$/;"	f	class:Giphy
-initialize	giphy_plugin.rb	/^  def initialize(tags)$/;"	f	class:Giphy
+initialize	giphy_plugin.rb	/^  def initialize(args)$/;"	f	class:Giphy
 new	giphy_plugin.rb	/^  def self.new(args=nil)$/;"	F	class:Giphy
 parse_json	giphy_plugin.rb	/^  def parse_json$/;"	f	class:Giphy
 random	giphy_plugin.rb	/^  def random$/;"	f	class:Giphy
