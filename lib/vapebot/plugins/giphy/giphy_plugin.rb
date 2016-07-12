@@ -5,6 +5,7 @@ class Giphy < Vapebot::Plugin
   attr_reader :tags
   def initialize(args)
     @tags = args
+    puts tags
   end
 
   def self.new(args=nil)

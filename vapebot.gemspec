@@ -1,11 +1,9 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'vapebot/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "vapebot"
-  spec.version       = Vapebot::VERSION
   spec.authors       = ["jakenotjacob"]
   spec.email         = ["jake.campbell91@gmail.com"]
   spec.description   = "An IRC bot for ##vaperhangout on freenode's IRC server."
@@ -24,8 +22,8 @@ Gem::Specification.new do |spec|
   spec.executables   = %w[vapebot]
   spec.require_paths = %w[lib]
 
-  spec.add_development_dependency "bundler", "~> 1.10"
-  spec.add_development_dependency "rake", "~> 10.0"
+  spec.add_development_dependency "bundler"
+  spec.add_development_dependency "rake"
   spec.add_development_dependency "rspec"
   spec.add_development_dependency "colorize"
   spec.add_development_dependency "sqlite3"
