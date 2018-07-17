@@ -1,6 +1,6 @@
 # Tokbot
 
-This is a little factoid bot created for use in the vaperhangout channel on Freenode.
+This is a little factoid bot, initially created for use in vaperhangout in Freenode.
 
 ## Installation
 
