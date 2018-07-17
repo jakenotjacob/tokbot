@@ -1,4 +1,4 @@
-# Vapebot
+# Tokbot
 
 This is a little factoid bot created for use in the vaperhangout channel on Freenode.
 
@@ -7,7 +7,7 @@ This is a little factoid bot created for use in the vaperhangout channel on Free
 Clone the repository:
 
 ```
-git clone git@github.com:jaketnotjacob/vapebot
+git clone git@github.com:jaketnotjacob/tokbot
 ```
 
 Install the dependencies:
@@ -29,15 +29,15 @@ Modify this file to your needs before running.
 
 Run the bot using (either):
 
-    $ bundle exec vapebot
+    $ bundle exec tokbot
 or simply...
-    $ vapebot
+    $ tokbot
 
 ## Development
 
 Please follow the development model [A Successful Git branching model (Vincent Driessen)](http://nvie.com/posts/a-successful-git-branching-model/) when working on this project.  We feel that this is the best way to keep the tree nice and tidy for the time being (though we are always open to suggestions!).
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/jakenotjacob/vapebot.
+Bug reports and pull requests are welcome on GitHub at https://github.com/jakenotjacob/tokbot.
 
 ## License
 

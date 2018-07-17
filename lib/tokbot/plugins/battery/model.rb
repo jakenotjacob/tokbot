@@ -1,4 +1,4 @@
-DB = Sequel.connect("sqlite://data/vapebot.db")
+DB = Sequel.connect("sqlite://data/tokbot.db")
 class BatteryDB < Sequel::Model(:batteries)
   def basics
     [full_name, "Wrap color: #{wrap_color.capitalize}", capacity, voltages, max_discharge, spec_sheet].join(" ║ ")

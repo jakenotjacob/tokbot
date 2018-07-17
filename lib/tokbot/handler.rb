@@ -1,7 +1,7 @@
 #Load all the plugins
 Dir[__dir__+'/plugins/**/*_plugin.rb'].each {|file| require file }
 
-module Vapebot
+module Tokbot
   module Handler
     def plugins
       PluginManager.plugins

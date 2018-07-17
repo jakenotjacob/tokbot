@@ -1,5 +1,5 @@
 #$:.unshift File.dirname(__FILE__)
-module Vapebot
+module Tokbot
 module Logger
   def self.init(channels)
     self.create_dirs

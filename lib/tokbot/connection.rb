@@ -1,4 +1,4 @@
-module Vapebot
+module Tokbot
 class Connection
   include IRC
   attr_accessor :socket

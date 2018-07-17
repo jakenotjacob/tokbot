@@ -1,4 +1,4 @@
-module Vapebot
+module Tokbot
 module IRC
   def register
     send_nick

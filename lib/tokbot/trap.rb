@@ -1,4 +1,4 @@
-module Vapebot
+module Tokbot
 module Trapper
   def trap_signals
     [:INT, :TSTP].each do |signal|
@@ -7,7 +7,7 @@ module Trapper
         when :INT
           Logger.write_status(Config[:channels], "Closing")
           connection.close
-          File.delete('bin/vapebot.pid')
+          File.delete('bin/tokbot.pid')
           abort "\nClosing bot..."
         when :TSTP
           puts "\nEnter text to send: "

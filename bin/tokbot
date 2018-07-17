@@ -2,21 +2,21 @@
 $:.unshift File.dirname(__FILE__)
 
 begin
-  require 'vapebot'
+  require 'tokbot'
 
-  if File.exist? "bin/vapebot.pid"
+  if File.exist? "bin/tokbot.pid"
     abort "Bot instance already running!"
   end
 
   begin
-  if (bot = Vapebot::Bot.new)
+  if (bot = Tokbot::Bot.new)
     puts "Affirmative, Dave. I read you.".green
     puts "---"
-    File.new("bin/vapebot.pid", "a+").write(Process.pid)
+    File.new("bin/tokbot.pid", "a+").write(Process.pid)
     bot.run
   end
   rescue => e
-    File.delete "bin/vapebot.pid" if File.exist? "bin/vapebot.pid"
+    File.delete "bin/tokbot.pid" if File.exist? "bin/tokbot.pid"
     puts "Something's fucky...".red
     puts "---"
     puts "#{e.message}".yellow

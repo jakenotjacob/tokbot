@@ -1,5 +1,5 @@
 require 'json'
-class Giphy < Vapebot::Plugin
+class Giphy < Tokbot::Plugin
   PUBLIC_API_KEY = "dc6zaTOxFJmzC"
   URL = "http://api.giphy.com/v1/gifs/"
   attr_reader :tags

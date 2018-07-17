@@ -1,4 +1,4 @@
-module Vapebot
+module Tokbot
 class Message
   attr_accessor :args, :cmd, :cmd_args
   attr_reader :source, :target

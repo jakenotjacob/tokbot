@@ -1,8 +1,8 @@
-module Vapebot
+module Tokbot
 module Database
 
-  DB = if File.exist? "data/vapebot.db"
-         Sequel.sqlite("data/vapebot.db")
+  DB = if File.exist? "data/tokbot.db"
+         Sequel.sqlite("data/tokbot.db")
        else
          puts "Error! Database has not yet been created!".red
          abort("Please run `rake db:create` then retry.")

@@ -1,4 +1,4 @@
-class Calc < Vapebot::Plugin
+class Calc < Tokbot::Plugin
   def initialize(args)
     foo, bar = args
   end

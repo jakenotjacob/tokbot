@@ -1,4 +1,4 @@
-module Vapebot
+module Tokbot
 module Command
   COMMANDS = {
     #channels: {

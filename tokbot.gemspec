@@ -3,11 +3,11 @@ lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
-  spec.name          = "vapebot"
+  spec.name          = "tokbot"
   spec.authors       = ["jakenotjacob"]
   spec.email         = ["jake.campbell91@gmail.com"]
   spec.description   = "An IRC bot for ##vaperhangout on freenode's IRC server."
-  spec.homepage      = "www.vapebot.xyz"
+  spec.homepage      = "www.tokbot.xyz"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org by setting 'allowed_push_host', or
@@ -18,8 +18,8 @@ Gem::Specification.new do |spec|
   #  raise "RubyGems 2.0 or newer is required to protect against public gem pushes."
   #end
 
-  spec.files = %w[vapebot.gemspec] + Dir['*.md', 'bin/*', 'lib/**/*.rb']
-  spec.executables   = %w[vapebot]
+  spec.files = %w[tokbot.gemspec] + Dir['*.md', 'bin/*', 'lib/**/*.rb']
+  spec.executables   = %w[tokbot]
   spec.require_paths = %w[lib]
 
   spec.add_development_dependency "bundler"

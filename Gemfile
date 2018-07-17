@@ -1,4 +1,4 @@
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in vapebot.gemspec
+# Specify your gem's dependencies in tokbot.gemspec
 'gemspec'

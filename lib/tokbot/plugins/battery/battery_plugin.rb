@@ -1,5 +1,5 @@
 require_relative "model"
-class Battery < Vapebot::Plugin
+class Battery < Tokbot::Plugin
   attr_reader :info
   def initialize(args)
     abbr, attr = args

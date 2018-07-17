@@ -1,4 +1,4 @@
-module Vapebot
+module Tokbot
   module PluginManager
     def self.plugins
       @plugins ||= {}

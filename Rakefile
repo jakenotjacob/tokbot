@@ -10,17 +10,17 @@ task :default => :spec
 namespace :db do
   Dir.mkdir "data" unless Dir.exists? "data"
   task :create, :table do |t, args|
-    db = Sequel.sqlite('data/vapebot.db')
-    if !File.exists? 'data/vapebot.db'
-      puts "Vapebot database created.".green
+    db = Sequel.sqlite('data/tokbot.db')
+    if !File.exists? 'data/tokbot.db'
+      puts "Tokbot database created.".green
     end
     if args.any?
-      eval "VapebotDB::create_#{args[:table]}_table(db)"
+      eval "TokbotDB::create_#{args[:table]}_table(db)"
       puts "Table #{args[:table]} created.".green
     else
       %i(facts users batteries).each do |n|
         unless db.table_exists? n
-          eval "VapebotDB::create_#{n.to_s}_table db"
+          eval "TokbotDB::create_#{n.to_s}_table db"
           puts "#{n.to_s} table created.".green
         end
       end
@@ -28,7 +28,7 @@ namespace :db do
   end
 end
 
-module VapebotDB
+module TokbotDB
   def self.create_facts_table(db)
     db.create_table :facts do
       primary_key :id
